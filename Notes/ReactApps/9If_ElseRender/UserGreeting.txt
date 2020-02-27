@@ -1,0 +1,30 @@
+Note:- If else statement doesn't work inside a JSX that is because JSX is just syntatic sugar
+          for function calls & object construction.
+
+
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+
+class UserGreeting extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        isLoggedIn:false
+    };
+  }
+
+  render() {
+    if(this.state.isLoggedIn){
+        return(
+        <Text>Welcome Vishwas</Text>
+        )
+    }
+    else{
+        return(
+        <Text>Welcome Guest</Text>
+        )
+    }
+  }
+}
+
+export default UserGreeting;

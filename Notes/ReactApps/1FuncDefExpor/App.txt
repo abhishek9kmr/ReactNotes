@@ -1,0 +1,24 @@
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import Greet from './Greet';
+
+
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Greet/>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection:"column",
+    backgroundColor: '#0ff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    
+  },
+});

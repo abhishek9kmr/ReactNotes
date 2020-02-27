@@ -1,0 +1,48 @@
+// In App.js in a new project
+
+import * as React from 'react';
+import { View, Text, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import DetailsScreen from './DetailsScreen';
+import ThirdScreen from './ThirdScreen'
+
+ 
+
+function HomeScreen({navigation}) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
+      <Text>Home Screen</Text>
+      <Button
+          title="Press me"
+          color="#f194ff"
+          onPress={()=>navigation.navigate('Details')}
+          
+          // This can even be written as 
+          // onPress={()=>props.navigation.navigate('Details')}
+          // but in this case you will have to pass argument as props insted of {navigation}
+          // in HomeScreen functional component.
+        
+          />
+
+    </View>
+    
+  );
+}
+
+
+const Stack = createStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="Details" component={DetailsScreen}  />
+        <Stack.Screen name="Third" component={ThirdScreen}  />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;

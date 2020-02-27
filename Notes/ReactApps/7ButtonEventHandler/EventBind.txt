@@ -1,0 +1,33 @@
+import React, { Component } from 'react';
+import { View, Text, Button } from 'react-native';
+
+class EventBind extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        message: 'Hello'
+    };
+  }
+
+  clickHandler=()=>{
+      this.setState({
+          message:'Goodbye !'
+      })
+  }
+
+  render() {
+    return (
+      <View>
+        <Text> EventBind </Text>
+    <Text>{this.state.message}</Text>
+    
+        <Button
+          title="Press me"
+          onPress={this.clickHandler}/>
+          
+      </View>
+    );
+  }
+}
+
+export default EventBind;

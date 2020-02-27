@@ -1,0 +1,44 @@
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+
+class NameList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+
+   
+
+  render() {
+         const persons=[
+             {
+                 id:1,
+                 name:'Bruce',
+                 age:'30',
+                 skill:'React'
+             },
+             {
+                id:2,
+                name:'Abhishek',
+                age:'30',
+                skill:'Angular'
+            },
+            {
+                id:1,
+                name:'Clark',
+                age:'30',
+                skill:'Vue'
+            }
+         ];
+        const personList = persons.map(person=><Text>I am{person.name}. I am {person.age}years old. I know {person.skill}</Text>)
+        
+    return (
+          <View>
+         {personList} 
+      </View>
+    );
+  }
+}
+
+export default NameList;

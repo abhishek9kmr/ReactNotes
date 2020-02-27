@@ -1,0 +1,32 @@
+import React, { Component } from 'react';
+import { View, Text, Button } from 'react-native';
+
+class Message extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        message:'Welcome Visitor'
+    };
+  }
+
+  changeMessage=()=>{
+      this.setState({
+          message:'Thank you for subscribing'
+      })
+  }
+
+  render() {
+    return (
+      <View>
+        <Text> Message </Text>
+        <Text>{this.state.message}</Text>
+        <Button
+          title="Press me"
+          onPress={() => this.changeMessage()}
+        />
+      </View>
+    );
+  }
+}
+
+export default Message;

@@ -1,0 +1,24 @@
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+
+ export const Greet=()=>{
+    return (
+      <View>
+        <Text> Greet </Text>
+      </View>
+    );
+  }
+
+ export const Greet2=()=>{
+    return (
+    <View>
+    <Text> Greet2 </Text>
+  </View>
+);
+
+ }
+
+ 
+
+
+

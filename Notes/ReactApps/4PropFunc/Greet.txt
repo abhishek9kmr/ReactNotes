@@ -1,0 +1,11 @@
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+
+   const Greet=(props)=>{
+    return (
+      <View>
+        <Text> Hello {props.name} as {props.heroname} </Text>
+      </View>
+    );
+  }
+export default Greet;

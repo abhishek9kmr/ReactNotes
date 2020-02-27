@@ -1,0 +1,260 @@
+
+          INSTALLING LIBRARY
+         ---------------------------
+         ---------------------------
+
+ 1) npm install <library-with-native-dependencies> --save
+ 2)react-native link(in non expo) // check dependencies section
+       
+               FLEXBOX
+             --------------
+             --------------
+
+
+            FLEXDIRECTION
+           ---------------------
+
+
+ The main axis is from left to right in Web.
+
+ The default flex direction is along main axis. 
+ 
+    .container {
+                display:flex;
+                 border: 2px solid black;
+                 flex-direction:row/row-reverse/column/column-reverse;
+                   } 
+
+
+
+       JUSTIFY CONTENT(Along main axis)
+      ------------------------
+      ------------------------
+
+  justify-content:flex-start(default)/flex-end/space-around/space-between;
+
+
+      ALIGN ITEMS(Perpindicular to main axis)
+     -------------------------------------------------
+     -------------------------------------------------
+
+  The align-items property of flex-box aligns the items inside a flex container along
+  the cross axis just like justify-content does along the main axis.
+  But align-content is for multi line flexible boxes. It has no effect when items are in a single line.
+  It aligns the whole structure according to its value.
+
+
+  align-items:center(default)/flex-start/flex-end/stretch/baseline
+
+
+                    FLEXWRAP
+                 ---------------------
+                 ---------------------
+
+  flex-wrap:wrap/wrapreverse
+
+
+
+    ---------------------------------------------------------------------------------
+    |   FLEXBOX SERIES ORDERERING AND FLEX GROW NOT COVERED  |
+    ---------------------------------------------------------------------------------
+
+
+
+                                VIEWPORT 
+                                -------------
+                               
+
+  The viewport is the user's visible area of a web page.
+  It varies with the device and will be smaller on a mobile.
+
+
+
+  vh- This unit is based on height of viewport, 1 vh is equal to 
+        1% of the viewport height.
+  
+  vw
+
+  vmin - 1% of vh or vw whichever is smaller.
+
+  vmax
+
+
+--------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+  
+     * { } - Include variable .
+     * " " - Static value.
+     * {{ }} - Object
+
+
+   React uses JSX, In JSX any variable, state object , expression etc
+   has to be enclosed in {}. While giving inline styles in JSX, it has to be specified
+   as an object so it has to be inside curly braces again.
+
+
+ 
+ * < Image src= {{ uri : " http:// ......... }}
+
+    can also be written as 
+   ----------------------------
+
+
+   const imageInfo = { uri : "http:// .........}
+            <Image src = { imageInfo} />
+
+
+ * You can use style = {styles.container} to access the stylesheet of any element.
+ *  //-Single line comment 
+ * /*Block COMMENTS*/
+
+---------------------------------------------------------------------------------------------------------
+
+    import React from 'react'
+    import {Stylesheer,Text,View} from 'react-native'
+    .
+    .
+    export default class App extends React.Components{
+
+
+                                  OR
+                              -----------
+
+   import React, {Component} from 'react';
+   import {Stylesheer,Text,View} from 'react-native'
+    .
+    .
+   export default class App extends React.Components{
+
+
+---------------------------------------------------------------------------------------------------------------
+
+    
+
+
+
+
+
+
+                                      COMPONENTS
+                                   ----------------------
+
+   1)Functional component
+   2)Class component
+
+
+                    Functional component
+                   ----------------------------
+
+ * Normal javascript function.
+ *Functional components are just js functions. They can optionally receive object
+   of properties(props) and returns JSX which describes UI.
+
+
+                      ---------------------------
+                     |     Default Export      |      
+                     ----------------------------
+
+
+  Greet.js
+ -----------
+
+  import React from 'react'   --------------(step1)
+  function Greet() {
+                         return<h1> Hello Vishwas</h1>
+                          }
+
+  export default Greet ;    ------------------(step2)
+
+  App.js (receiving)
+  ---------------------
+
+   import Greet from './components/Greet' --------(step 1)
+     .
+     .
+     .
+
+  render(){
+           return(
+                   <div className= 'App'>
+                    <Greet/>
+                   </div>
+
+ Rewriting the Greet.js with es2
+ --------------------------------------
+
+  const Greet =( )=> <h1> Hello </h1>
+
+
+
+ 
+                      ---------------------------
+                     |     Named  Export      |      
+                      ---------------------------
+
+
+        Greet.js
+        -----------
+
+  import React from 'react'   --------------(step1)
+
+  
+  export const Greet =( )=> <h1> Hello </h1>
+
+
+   App.js (receiving)
+  ---------------------
+
+   import {Greet} from './components/Greet' --------(step 1)
+
+---------------------------------------------------------------------------------
+
+           STYLESHEET
+         ------------------------
+
+* <View style={styles.container}>
+
+* const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection:"column",
+    backgroundColor: '#0ff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    
+   },
+   });
+
+
+
+--------------------------------------------------------------------------------------------------------
+
+                          SETSTATE
+                       -----------------
+
+ *If normal function is used then only the console value changes.
+
+ *If setState is ued then only UI changes.
+
+ *To see the change in both UI and console, pass first parameter as object and second parameter
+   is callback function.
+
+ *Whever you have to update the state based on the previous state we have to pass function as an argument 
+   to setState method insted of passing an object.
+
+               
+
+               Difference between EventBind and Function calling
+             ------------------------------------------------------------------
+             ------------------------------------------------------------------
+
+
+   * EventBinding - onPress={this.clickHandle}/>
+
+   *Function calling- onPress={() => this.changeMessage()}
+
+
+
+
+
+

@@ -1,0 +1,27 @@
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+import ChildComponent from './ChildComponent';
+
+class ParentComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        parentName:'Parent'
+    };
+  }
+
+  greetParent=(childName)=>{
+      alert(`Hello ${this.state.parentName} from ${childName}`)
+  }
+
+  render() {
+    return (
+      <View>
+        <Text> ParentComponent </Text>
+        <ChildComponent greetHandler={this.greetParent}/>
+      </View>
+    );
+  }
+}
+
+export default ParentComponent;

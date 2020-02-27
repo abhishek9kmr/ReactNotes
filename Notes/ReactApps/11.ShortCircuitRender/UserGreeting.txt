@@ -1,0 +1,27 @@
+Note - This is for specific case of Ternary conditional approach. If you
+          want either something or nothing,  we make use of short circuit
+          operator. 
+
+
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+
+class UserGreeting extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        isLoggedIn:true
+    };
+  }
+
+  render() { 
+      return(
+
+    this.state.isLoggedIn&&<Text>Hello Abhishek</Text>
+ 
+    
+      ) 
+  }
+}
+
+export default UserGreeting;

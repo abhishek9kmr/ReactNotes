@@ -1,0 +1,276 @@
+            ARROW FUNCTION
+          -------------------------------
+          -------------------------------
+  
+     NORMAL JAVASCRIPT FUNCTION
+     ---------------------------------------
+
+     function myFunction(p1, p2) {
+     return p1 * p2;   // The function returns the product of p1 and p2
+            }
+
+
+
+     ES6 JAVASCRIPT 
+   --------------------------
+
+
+    const multiply = (number) =>{
+          return number*2;
+            }
+
+    console.log(multiply(2));
+
+
+   REDUCED ES6
+   -----------------
+
+
+  const multiply = number => number * 2
+  console.log(multiply(2));
+
+--------------------------------------------------------------------------
+
+
+         EXPORTS AND IMPORTS
+        ------------------------------
+
+
+  DEFAULT EXPORT
+  ---------------------
+
+
+    person.js
+    -----------
+
+
+    const person={
+          name: 'Max'
+            }
+
+     export default person
+
+
+         app.js
+         --------
+        import person from './person.js'
+  or   import prs from './person.js'
+
+        * Name in the receiving file is up to you.
+        * There can be only one default export.
+
+-------------------------------------------------------------------------
+
+    NAMED EXPORT
+   ----------------------
+
+    utility.js
+    ----------
+
+   (i) export const clean =()=>
+                          {.............}
+
+
+   (ii) export const baseData=10;
+
+
+
+
+
+     app.js
+     --------
+
+   import {baseData} from './utility.js'
+   import {clean} from './utility.js'
+
+  *One can have multiple named exports per file.
+  *Then import the specific exports they want surrounded in braces.
+  *The name of imported module has to be same as the name of the
+    exported module.
+
+
+    import {smth} from './utility.js'
+    import {smth as Smth} from './utility.js'
+    import * as bundled from './utility.js'      // for multiple imports
+
+
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+
+
+            SPREAD AND REST OPERATOR (...)
+            -----------------------------------------
+            -----------------------------------------
+
+
+    Spread syntax allows an iterable such as an array expression or string to be
+    expanded in places where zero or more elements( for array literals ) are expected
+    or an object expression to be expanded in places where zero or more key-value 
+    pairs ( for object literals ) are expected.
+
+    
+    ARRAY
+    --------
+
+    const numbers = [1,2,3];
+    const newNumbers= [ ... numbers, 4];
+    console.log(newNumbers); // [1,2,3,4]
+
+
+
+  OBJECT
+  ---------
+
+   const person = { 
+                      name: 'Max'
+                          };
+
+   const newPerson= {
+                        ...person,
+                         age:28
+                               }
+
+     console.log(newPerson); // [object Object] {
+                                                     age:28,
+                                                    name:"Max"
+                                                               }
+
+
+   spread - used to split up array elements OR object properties.   \/
+                                                                                            /\
+                 const newArray = [ ... oldArray,1,2]
+                 constObject = {... oldObject, newProp:5}
+
+   NOTE- Object and Arrays are refrence types. If you reassign them then 
+             you will copy the pointer, not the value.In such case if the value 
+              in the first array or object is changed then it bring changes in the
+              another array or object too.In such case spread operator is useful.
+
+
+         var a = [ 10, 20, 30];
+         var b = a;
+         a [0] = 50 ; // This change will be reflected in array b also.
+         console.log(a);
+         console.log(b); 
+
+
+      using spread operator
+      --------------------------
+
+       var a = [ 10, 20, 30];
+         var b = [ ...a ];
+         a [0] = 50 ; // This change won't be reflected in array b.
+         console.log(a);
+         console.log(b); 
+
+
+    --------------------------------------------------------------------------------
+  
+      var a = [ 10, 20, 30];
+      var b = [ 40, 50, 60];
+      var c = [ ...a, ...b ];
+      console.log(a); // [ 10, 20, 30]
+      console.log(b); // [ 40, 50, 60]
+      console.log(c); // [ 10, 20, 30, 40, 50, 60]
+
+
+ ----------------------------------------------------------------------------------
+
+    REST PARAMETER
+    ---------------------
+
+    The rest parameter allows to represent an indefinite number of arguments 
+    as an array.
+
+     syntax
+     --------
+
+ 1)  function function_name( ...args)
+          {
+            Block of statement;
+           }
+
+
+ 2) function function_name( a, ...args)
+          {
+            Block of statement;
+           }
+
+     NOTE - The rest parameter must be the last parameter to a function.
+
+
+    function show ( a, ...args)
+          {
+            document.write( a ) // 10
+            document.write( args ) // 20,30,40,50
+            document.write( args [0] ) // 20
+           }
+           show(10,20,30,40,50);
+
+
+
+
+
+  
+----------------------------------------------------------------------------------------------
+
+                         
+               DESTRUCTURING
+               ---------------------
+               ---------------------
+
+
+   Easly extract array element or object properties and store them in variable.
+
+
+      Array Destructuring
+      -----------------------
+
+
+  [a,b]=[ 'Hello', 'Max']
+   console.log(a) // Hello
+   console.log(b) // Max
+
+
+
+   Object Destructuring 
+   ---------------------------------------------------------------------------------------------------
+
+  {name} = {name: 'Max', age:28}
+       console.log(name) //Max
+       console.log(age)  //undefined(we have not pulled out property name age here.
+
+
+  Note - In case of array destructuring the order defines to which element we take.
+            For object destructuring it's the property name.
+
+
+
+  const numbers = [1,2,3];
+  [ num1,num2] = numbers;
+  console.log(num1,num2); //1
+                                     // 2  
+
+
+
+  const numbers = [ 1,2,3 ]
+  [ num1,  , num2]= numbers;
+  console.log(num1,num2); // 1
+                                      // 3
+
+    
+
+
+   
+
+
+
+  
+
+
+  
+
+
+
+
+   

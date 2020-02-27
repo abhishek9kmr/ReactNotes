@@ -1,0 +1,25 @@
+import React, { Component } from 'react';
+import { View, Text,Button } from 'react-native';
+
+  
+ class DetailsScreen extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+      };
+    }
+  render() {
+    return (
+      <View>
+        <Text> Details </Text>
+        <Button
+          title="Press me"
+          color="#f194ff"
+          onPress={()=>this.props.navigation.navigate('Third')}
+          />
+      </View>
+    );
+  }
+}
+
+export default DetailsScreen;
