@@ -186,6 +186,14 @@ const MyComponent = () => {}
 export default MyComponent;
 The naming of import is completely independent in default export and we can use any name we like.
 
+Exports without a default tag are Named exports.
+
+Exports with the default tag are Default exports.
+
+Using one over the other can have effects on your code readability, file structure, and component organization.
+
+Named and Default exports are not React-centric ideas. They are es6 features. 
+
 ---------------------------------------------------------------------------------
 
            STYLESHEET
