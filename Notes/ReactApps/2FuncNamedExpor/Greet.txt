@@ -15,8 +15,9 @@ import { View, Text } from 'react-native';
     <Text> Greet2 </Text>
   </View>
 );
+}
 
- }
+export const Greet3 = 'Greet 3 text';
 
  
 
