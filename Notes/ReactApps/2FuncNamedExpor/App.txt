@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import {Greet} from './Greet';
+import {Greet, Greet3} from './Greet';
 import {Greet2} from './Greet';
 
 
@@ -9,6 +9,7 @@ export default function App() {
     <View style={styles.container}>
       <Greet/>
       <Greet2/>
+      <Text>{Greet3}</Text>
     </View>
   );
 }
