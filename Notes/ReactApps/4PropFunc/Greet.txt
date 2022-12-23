@@ -9,3 +9,21 @@ import { View, Text } from 'react-native';
     );
   }
 export default Greet;
+
+====================================================================================================
+OR
+====================================================================================================
+
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+
+   const Greet=(props)=>{
+    const {name, heroname}= props
+    return (
+      <View>
+        <Text> Hello {name} as {heroname} </Text>
+      </View>
+    );
+  }
+export default Greet;
+
