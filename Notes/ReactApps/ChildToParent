@@ -1,0 +1,58 @@
+To pass data from a child component to its parent, we can call a parent function from the child component with arguments.
+The parent function can be passed down to the child as a prop, and the function arguments are the data that the parent will receive.
+
+Parent Component
+=================
+
+import React, { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import Child from './Child';
+
+
+
+export default function App() {
+
+ //This is Parent Component
+
+  const [word, setWord] = useState('Your Name')
+
+  return (
+    <View style={styles.container}>
+      <Text>This text will change on button press</Text>
+      <Text>{word}</Text>
+      <Child changeWord={word => setWord(word)} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: '#0ff',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  },
+});
+
+===================================== This is Child Component =============================================
+
+import React, { Component } from 'react';
+import { View, Text, Button } from 'react-native';
+
+const Child = (props) => {
+
+  // This is Child Component
+  return (
+    <View>
+      <Button
+        title="Press me"
+        color="#f194ff"
+        onPress={() => props.changeWord('Abhishek')}
+      />
+    </View>
+  );
+}
+export default Child;
+
