@@ -1,0 +1,40 @@
+//In this project the color of circle will change based on the value provided.
+
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+
+export default function App() {
+  let value = 0;
+  let trafficLightColor = () => {
+    if (value === 0) {
+      return 'red';
+    }
+    if (value === 1) {
+      return 'yellow';
+    }
+    if (value === 2) {
+      return 'green';
+    }
+  };
+  return (
+    <View style={styles.container}>
+      {/* Spread operator has been used */}
+      <View style={{...styles.circle, backgroundColor: trafficLightColor()}} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  circle: {
+    height: 200,
+    width: 200,
+    borderRadius: 100,
+    borderWidth: 2,
+  },
+});
