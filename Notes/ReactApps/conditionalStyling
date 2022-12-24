@@ -38,3 +38,43 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
 });
+
+===================================================================================================================================================
+
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+
+export default function App() {
+  let value = 0;
+  let shape = () => {
+    if (value === 0) {
+      return {height: 100, width: 100, backgroundColor: 'red'};
+    }
+    if (value === 1) {
+      return {
+        height: 100,
+        width: 100,
+        borderRadius: 50,
+        backgroundColor: 'green',
+      };
+    }
+    if (value === 2) {
+      return {height: 100, width: 50, backgroundColor: 'yellow'};
+    }
+  };
+  return (
+    <View style={styles.container}>
+      <View style={shape()} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
