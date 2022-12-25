@@ -1,0 +1,34 @@
+// We are going to implement componentDidUpdate using useEffect.
+// The variable is passed in an array(count). The useEffect will run every time the count changes.
+// Take care that useState should be written before useEffect to work.
+
+import React, {useEffect, useState} from 'react';
+import {Button, StyleSheet, Text, View} from 'react-native';
+
+export default function App() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log('use effect ran');
+  }, [count]);
+
+  return (
+    <View style={styles.container}>
+      <Text>{count}</Text>
+      <Button
+        title="Press me"
+        color="#f194ff"
+        onPress={() => setCount(count + 1)}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
