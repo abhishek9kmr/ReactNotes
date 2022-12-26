@@ -1,0 +1,37 @@
+//This will be used for rough work
+
+//Here we are trying to achieve componentWillUnmount using useEffect
+
+import React, { useEffect, useState } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
+
+export default function App() {
+  const [dispTxt1, setDispTxt1] = useState(false);
+
+  useEffect(() => {
+    console.log('use effect ran');
+    return () => { console.log('Try component unmount'); }
+  }, []);
+
+  console.log('dispText1????', dispTxt1)
+
+  return (
+    <View style={styles.container}>
+      {dispTxt1 && <Text>This is text one</Text>}
+      <Button
+        title="Press me"
+        color="#f194ff"
+        onPress={() => setDispTxt1(!dispTxt1)}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
