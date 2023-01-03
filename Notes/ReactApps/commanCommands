@@ -1,0 +1,15 @@
+Start emulator ==> /Users/webskitters/Library/Android/sdk/emulator/emulator -avd Pixel_XL_API_31 -netdelay none -netspeed full
+
+
+Grade clean ==> cd android &&./gradlew clean
+Reset cache ==> npm start -- --reset-cache
+
+npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
+
+Build app ==>   cd android && ./gradlew assembleRelease
+
+Note - $ cd android
+#Create debug build:
+$ ./gradlew assembleDebug
+#Create release build:
+$ ./gradlew assembleRelease
