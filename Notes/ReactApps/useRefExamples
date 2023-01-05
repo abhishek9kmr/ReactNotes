@@ -1,0 +1,138 @@
+Example - 1
+=============
+
+Example 1: We will be using ref in this example to create a button,  on click of which the focus should shift to the TextInput component.
+
+In App.js First, we are importing the useRef hook from ‘react’. Then, inside the component, 
+we are creating a ref object using useRef which is named as textRef. 
+
+Pressing the button will call the createFocusOnTextInput() function, which in this case will shift the focus to the TextInput component. 
+In this function, we are accessing the component with the help of .current property.
+
+import { useState, useRef } from 'react';
+import { Text, View, StyleSheet, TextInput, Button }
+	from 'react-native';
+
+export default function App() {
+	const [name, setName] = useState("")
+
+	// Creating a ref Object using useRef Hook
+	const textRef = useRef()
+
+	// Function to shift focus on TextInput component
+	function createFocusOnTextInput() {
+		textRef.current.focus();
+	}
+
+	return (
+		<View style={styles.container}>
+			<TextInput
+
+				// Creating reference to the TextInput component
+				ref={textRef}
+				onChangeText={text => setName(text)}
+				style={styles.input}
+			/>
+			<Text style={styles.text}>My Name is {name}</Text>
+			<Button
+				onPress={createFocusOnTextInput}
+				title="Focus On Text Input Component"
+			/>
+		</View>
+	);
+}
+
+// Styles for Text and View components
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#72e6e8',
+		padding: 8,
+		color: 'white'
+	},
+	input: {
+		height: 40,
+		width: 300,
+		margin: 12,
+		borderWidth: 3,
+		color: '#000000',
+		padding: 10,
+	},
+	text: {
+		margin: 14,
+		fontSize: 20,
+		fontWeight: 'bold',
+		textAlign: 'center',
+		color: 'white',
+	},
+});
+
+============================================================================================================
+
+Example-2
+==========
+
+Example 2: In the following example, we are creating a Text Input and showing its value in a text component. 
+Whenever we type something in the text input it triggers an event which in turn is updating the name state. As soon as the value of the state
+changes the components get re-rendered. Our goal is to count how many times the component is re-rending. So, we are updating 
+renderCount.current by incrementing it. This update will never ever gonna causes our component to re-render bcz it’s completely separate from 
+our component render lifecycle. 
+
+import { useState, useEffect, useRef } from 'react';
+import { Text, View, StyleSheet, TextInput }
+	from 'react-native';
+
+export default function App() {
+	const [name, setName] = useState('')
+	const renderCount = useRef(0)
+
+	// It's an object with current property {current: 0}
+	useEffect(() => {
+
+		// Updating the counter value on each re-render
+		renderCount.current = renderCount.current + 1
+	})
+
+	return (
+		<View style={styles.container}>
+			<TextInput
+				onChangeText={text => setName(text)}
+				style={styles.input}
+			/>
+			<Text style={styles.text}>My Name is {name}</Text>
+			<Text style={styles.text}>
+				I rendered {renderCount.current} times
+			</Text>
+		</View>
+	);
+}
+
+// Styles for Text and View components
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#72e6e8',
+		padding: 8,
+		color: 'white'
+	},
+	input: {
+		height: 40,
+		width: 300,
+		margin: 12,
+		borderWidth: 3,
+		color: '#000000',
+		padding: 10,
+	},
+	text: {
+		margin: 14,
+		fontSize: 20,
+		fontWeight: 'bold',
+		textAlign: 'center',
+		color: 'white',
+	},
+});
+
