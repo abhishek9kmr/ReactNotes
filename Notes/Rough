@@ -35,3 +35,55 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+===============================================================================================
+
+import React, { useState } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import Greet from './Child';
+
+
+
+export default function App() {
+	const [val, setVal] = useState(0)
+
+	const funInterval =()=>{setVal(val+1); console.log('funInterval????', val)}
+	const setInt =()=>{setInterval(funInterval, 1000); console.log('setInt????', val)}
+	
+	return (
+		<View style={styles.container}>
+			<Greet count={val} />
+			<Button
+				onPress={setInt}
+				title="Learn More"
+				color="#841584"
+				accessibilityLabel="Learn more about this purple button"
+			/>
+		</View>
+	);
+}
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		flexDirection: "column",
+		backgroundColor: '#0ff',
+		alignItems: 'center',
+		justifyContent: 'center',
+
+	},
+});
+
+And
+
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+
+   const Greet=(props)=>{
+    return (
+      <View>
+        <Text> The count is {props.count} </Text>
+      </View>
+    );
+  }
+export default Greet;
