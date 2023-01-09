@@ -87,3 +87,53 @@ import { View, Text } from 'react-native';
     );
   }
 export default Greet;
+
+=============================================================================================================================
+
+MULTIPLE CHECKBOX
+==================
+
+import React, { useState } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
+
+
+const data = [
+  { id: 1, txt: 'React Native' },
+  { id: 2, txt: 'Javascript' },
+  { id: 3, txt: 'Laravel' },
+  { id: 4, txt: 'PHP' },
+  { id: 5, txt: 'jQuery' },
+  { id: 6, txt: 'Boostrap' },
+  { id: 7, txt: 'HTML' },
+];
+
+export default function App() {
+  const [toggleCheckBox, setToggleCheckBox] = useState(false)
+  return (
+    <View style={styles.container}>
+      {data.map((a) => (
+        <View style={{ flexDirection: 'row' }}
+          key={a.id}>
+          <CheckBox
+            disabled={false}
+            value={toggleCheckBox}
+            onValueChange={(newValue) => setToggleCheckBox(newValue)}
+          />
+          <Text style={{ marginTop: 4, fontWeight: 'bold' }}>
+            {a.txt}
+          </Text>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: '#0ff',
+    justifyContent: 'center',
+  },
+});
