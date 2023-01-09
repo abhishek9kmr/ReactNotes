@@ -260,6 +260,10 @@
                                       
 ==================================================================================================
 
+
+REDUCE METHOD
+==============
+
 The reduce() method executes a reducer function for array element.
 
 The reduce() method returns a single value: the function's accumulated result.
