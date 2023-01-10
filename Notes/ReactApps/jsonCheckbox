@@ -1,0 +1,69 @@
+https://stackoverflow.com/questions/67033948/handling-checkbox-in-react-native-using-map
+
+You'll have to store the state of your checkboxes separate from the data itself, in React state.
+
+First create an empty object on first render, this will act as a map of checkbox ids to their checked value:
+
+const [checked, setChecked] = React.useState({});
+Inside your map you can find the value of that particular checkbox based on b.id:
+
+value={checked[b.id]}
+Finally in your callback, make sure you update the right value in checked also based on b.id:
+
+onValueChange={(newValue) => { setChecked({...checked, [b.id]: newValue}) }}
+
+onValueChange	function is invoked with the new boolean value when it changes.
+
+Put it all together :
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
+
+
+const data = [
+  { id: 1, txt: 'React Native', price: 1 },
+  { id: 2, txt: 'Javascript', price: 2 },
+  { id: 3, txt: 'Laravel', price: 3 },
+  { id: 4, txt: 'PHP', price: 4 },
+  { id: 5, txt: 'jQuery', price: 5 },
+  { id: 6, txt: 'Boostrap', price: 6 },
+  { id: 7, txt: 'HTML', price: 7 },
+];
+
+export default function App() {
+  const [checked, setChecked] = useState({});
+  useEffect(()=>{console.log('checked??', checked)}, [checked])
+  
+  return (
+    <View style={styles.container}>
+      {data.map((b, index) => {
+        return (
+          <View key={b.id} style={{ flex: 1, flexDirection: 'column', paddingLeft: 15, paddingRight: 15 }}>
+            <View style={{ flexDirection: 'row-reverse', alignItems: 'center', justifyContent: 'space-between' }}>
+              <CheckBox
+                disabled={false}
+                value={checked[b.id]}
+                onValueChange={(newValue) => { setChecked({ ...checked, [b.id]: newValue }) }}
+              />
+              <Text>{b.txt}</Text>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={{ fontSize: 10, fontWeight: 'bold', color: 'grey' }}>
+                {" USD " + b.price}
+              </Text>
+            </View>
+          </View>
+        )
+      })}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: '#0ff',
+    justifyContent: 'center',
+  },
+});
