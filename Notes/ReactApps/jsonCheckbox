@@ -12,7 +12,7 @@ Finally in your callback, make sure you update the right value in checked also b
 
 onValueChange={(newValue) => { setChecked({...checked, [b.id]: newValue}) }}
 
-onValueChange	function is invoked with the new boolean value when it changes.
+onValueChange function is invoked with the new boolean value when it changes.
 
 Put it all together :
 import React, { useEffect, useState } from 'react';
