@@ -32,7 +32,7 @@ const data = [
 
 export default function App() {
   const [checked, setChecked] = useState({});
-  useEffect(()=>{console.log('checked??', checked)}, [checked])
+  //useEffect(()=>{console.log('checked??', checked)}, [checked])
   
   return (
     <View style={styles.container}>
