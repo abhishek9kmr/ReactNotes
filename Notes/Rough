@@ -192,3 +192,132 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+=================================================================================================
+
+import React, { useEffect, useState } from 'react';
+
+import {
+  SafeAreaView,
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
+
+import RNBiometrics from "react-native-simple-biometrics";
+import Modal from "react-native-modal";
+
+
+const bioFun = async () => {
+  const can = await RNBiometrics.canAuthenticate();
+  console.log('biometric possible', can)
+  if (can) {
+    try {
+      await RNBiometrics.requestBioAuth("Verify biometric", " ");
+      console.log('Biometric try ran')
+      setModalVisible(false)
+      // stuff to do when authenticated
+      // ...
+    } catch (error) {
+      console.log('Biometric catch ran', error)
+      // stuff to do when auth failed
+      // ...
+    }
+  }
+}
+
+const App = () => {
+
+  const [isModalVisible, setModalVisible] = useState(true);
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  useEffect(() => { bioFun() }, [])
+
+
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        {/* <Modal isVisible={isModalVisible}>
+        <View style={{ flex: 1 }}>
+          <Text>Hello!</Text>
+
+          <Button title="Hide modal" onPress={toggleModal} />
+        </View>
+      </Modal> */}
+
+        <Modal style={{ alignSelf: 'center' }}
+          animationIn={'fadeIn'}
+          animationOut={'fadeOut'}
+          backdropTransitionOutTiming={0}
+          hideModalContentWhileAnimating={true}
+          isVisible={isModalVisible}
+          animationInTiming={400}
+        //onBackdropPress={() => onBackdropPress()}
+
+        >
+          <View style={styles.overlay}>
+            <View style={{
+              backgroundColor: 'white', borderRadius: 10,
+              width: 240, paddingVertical: 30,
+            }}>
+              <Text style={{
+                color: 'green', fontSize: 25, marginBottom: 10,
+                textAlign: 'center'
+              }}>
+                Verify biometric</Text>
+              <Text style={{
+                textAlign: 'center', width: '65%',
+                alignSelf: 'center', color: 'grey', lineHeight: 18,
+                fontSize: 14,
+              }}>
+                You need to verify biometric or use pin to sign in.</Text>
+
+              <View style={{
+
+                flexDirection: 'row', justifyContent: 'space-evenly', width: '90%',
+                alignSelf: 'center', marginTop: 15
+              }}>
+
+                <TouchableOpacity
+                  onPress={bioFun}
+                  style={{
+                    width: 90, height: 40, borderRadius: 10,
+                    alignItems: 'center',
+                    backgroundColor: 'green', justifyContent: 'center'
+                  }}>
+                  <Text style={{
+                    color: 'white',
+                    fontSize: 14,
+                  }}>OK</Text>
+                </TouchableOpacity>
+              </View>
+
+            </View>
+          </View>
+        </Modal >
+        <Text>Biometric example</Text>
+        {/* <Text>Biometric possible {can}</Text> */}
+      </View>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  overlay: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+});
+
+export default App;
