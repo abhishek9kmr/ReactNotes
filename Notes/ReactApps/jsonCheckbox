@@ -3,16 +3,14 @@
 // You'll have to store the state of your checkboxes separate from the data itself, in React state.
 
 // First create an empty object on first render, this will act as a map of checkbox ids to their checked value:
-
 // const [checked, setChecked] = React.useState({});
+
 // Inside your map you can find the value of that particular checkbox based on b.id:
-
 // value={checked[b.id]}
+
 // Finally in your callback, make sure you update the right value in checked also based on b.id:
-
-// onValueChange={(newValue) => { setChecked({...checked, [b.id]: newValue}) }}
-
 // onValueChange function is invoked with the new boolean value when it changes.
+// onValueChange={(newValue) => { setChecked({...checked, [b.id]: newValue}) }}
 
 // Put it all together :
 
