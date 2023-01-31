@@ -1,20 +1,21 @@
-https://stackoverflow.com/questions/67033948/handling-checkbox-in-react-native-using-map
+//https://stackoverflow.com/questions/67033948/handling-checkbox-in-react-native-using-map
 
-You'll have to store the state of your checkboxes separate from the data itself, in React state.
+// You'll have to store the state of your checkboxes separate from the data itself, in React state.
 
-First create an empty object on first render, this will act as a map of checkbox ids to their checked value:
+// First create an empty object on first render, this will act as a map of checkbox ids to their checked value:
 
-const [checked, setChecked] = React.useState({});
-Inside your map you can find the value of that particular checkbox based on b.id:
+// const [checked, setChecked] = React.useState({});
+// Inside your map you can find the value of that particular checkbox based on b.id:
 
-value={checked[b.id]}
-Finally in your callback, make sure you update the right value in checked also based on b.id:
+// value={checked[b.id]}
+// Finally in your callback, make sure you update the right value in checked also based on b.id:
 
-onValueChange={(newValue) => { setChecked({...checked, [b.id]: newValue}) }}
+// onValueChange={(newValue) => { setChecked({...checked, [b.id]: newValue}) }}
 
-onValueChange function is invoked with the new boolean value when it changes.
+// onValueChange function is invoked with the new boolean value when it changes.
 
-Put it all together :
+// Put it all together :
+
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
