@@ -44,6 +44,14 @@ export default function App() {
                 value={checked[b.id]}
                 onValueChange={(newValue) => { setChecked({ ...checked, [b.id]: newValue }) }}
               />
+              OR
+               onValueChange={() => {
+                setToggleCheckBox({
+                  ...toggleCheckBox,
+                  [d.id]: !toggleCheckBox[d.id],
+                });
+              }}
+              />
               <Text>{b.txt}</Text>
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
