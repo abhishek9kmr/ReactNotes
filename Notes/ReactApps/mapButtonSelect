@@ -1,0 +1,59 @@
+//Here's an example of how you can create a button using a map on an array of
+// objects and change the color of the button on clicking it in React Native:•
+
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+
+const data = [
+  {id: 1, title: 'Button 1'},
+  {id: 2, title: 'Button 2'},
+  {id: 3, title: 'Button 3'},
+];
+
+const App = () => {
+  const [selectedButton, setSelectedButton] = useState(1);
+
+  const handleButtonPress = id => {
+    setSelectedButton(id);
+  };
+
+  return (
+    <View style={styles.container}>
+      {data.map(item => (
+        <TouchableOpacity
+          key={item.id}
+          style={[styles.button, item.id === selectedButton && styles.red]}
+          onPress={() => handleButtonPress(item.id)}>
+          <Text style={styles.text}>{item.title}</Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
+};
+
+export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 5,
+  },
+  text: {
+    color: 'white',
+    fontSize: 18,
+  },
+  red: {
+    backgroundColor: 'red',
+  },
+});
+
+// In this example, we have an array of objects data with id and title properties. We use the map function to loop through the array and render a TouchableOpacity component for each object in the array.
+
+// We use a state selectedButton to keep track of the selected button. When a button is pressed, the handleButtonPress function is called, which updates the selectedButton state with the id of the pressed button.
+
+// Finally, we use the && operator to include the styles.red style in the TouchableOpacity component's style if the id of the current object matches the selectedButton. This way, we can change the color of the button on clicking it.
