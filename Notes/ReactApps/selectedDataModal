@@ -1,0 +1,63 @@
+//To display an element of an array on a Modal component when an item is clicked in a FlatList in React Native, you can
+//create a state variable to keep track of the selected item, and use the Modal component to display the selected item.
+
+//Here's an example code snippet:
+
+import React, {useState} from 'react';
+import {View, Text, FlatList, Modal, Button} from 'react-native';
+
+const data = [
+  {id: 1, name: 'Item 1', description: 'Description for item 1'},
+  {id: 2, name: 'Item 2', description: 'Description for item 2'},
+  {id: 3, name: 'Item 3', description: 'Description for item 3'},
+  {id: 4, name: 'Item 4', description: 'Description for item 4'},
+];
+
+const App = () => {
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handlePress = item => {
+    setSelectedItem(item);
+    setModalVisible(true);
+  };
+
+  const renderItem = ({item}) => (
+    <View>
+      <Text onPress={() => handlePress(item)}>{item.name}</Text>
+    </View>
+  );
+
+  return (
+    <View>
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={item => item.id.toString()}
+      />
+      <Modal visible={modalVisible} animationType="slide">
+        <View>
+          <Text>{selectedItem?.name}</Text>
+          <Text>{selectedItem?.description}</Text>
+          <Button title="Close" onPress={() => setModalVisible(false)} />
+        </View>
+      </Modal>
+    </View>
+  );
+};
+
+export default App;
+
+//In this example, we create a data array containing objects with an id, name, and description property.
+//We then create two state variables: selectedItem to keep track of the selected item in the FlatList, and
+//modalVisible to control the visibility of the Modal component.
+
+//We use the FlatList component to render the list of items, and the renderItem function to render each item as a Text component
+//with an onPress event handler that calls the handlePress function with the selected item as a parameter.
+
+//The handlePress function sets the selectedItem state variable to the selected item and sets the modalVisible state variable to true,
+//which will display the Modal component.
+
+//The Modal component displays the name and description properties of the selectedItem, and a Button component to close the Modal.
+//The visible prop is set to the value of the modalVisible state variable, which will show or hide the Modal component based on its value.
+//When the Button is pressed, the modalVisible state variable is set to false, which will hide the Modal component.
