@@ -1,0 +1,31 @@
+//You can display a text a given number of times in React Native by using the Array constructor's fill()
+//method to create an array of the desired length, and then using the map() method to render
+//the text component the required number of times. Here's an example
+
+import React from 'react';
+import { View, Text } from 'react-native';
+
+const App = () => {
+  const text = 'Hello World!';
+  const numTimes = 5;
+
+  const textArray = Array(numTimes).fill(text);
+
+  return (
+    <View>
+      {textArray.map((item, index) => (
+        <Text key={index}>{item}</Text>
+      ))}
+    </View>
+  );
+};
+
+export default App;
+
+//In this example, we create a text variable containing the text we want to display, and
+//a numTimes variable containing the number of times we want to display it. We then use the Array constructor's fill() method
+//to create an array of length numTimes filled with the text variable.
+
+//We then use the map() method to loop through the textArray and render a Text component for each item in the array,
+//using the key prop to assign a unique identifier to each component. The text variable is passed as the child of the Text component, 
+//which will render the text on the screen the required number of times.
