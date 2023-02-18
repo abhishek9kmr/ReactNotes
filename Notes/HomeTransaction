@@ -1,0 +1,121 @@
+import React from 'react';
+import {View, Text, StyleSheet, Image} from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  dateContainer: {
+    marginVertical: 10,
+  },
+  dateText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  itemContainer: {
+    marginVertical: 5,
+    flexDirection: 'row',
+    padding: 10,
+    backgroundColor: 'pink',
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  itemName: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  img: {height: 40, width: 40},
+});
+
+const data = [
+  {
+    id: 1,
+    name: 'JazzCash',
+    time: '6:23 PM',
+    amount: 'NGN: 200',
+    paymentStatus: 'Pending Payment',
+    img: require('./Icons/man.png'),
+  },
+  {
+    id: 2,
+    name: 'JazzCash',
+    time: '6:23 PM',
+    amount: 'NGN: 200',
+    paymentStatus: 'Pending Payment',
+    img: require('./Icons/man1.png'),
+  },
+  {
+    id: 3,
+    name: 'JazzCash',
+    time: '6:23 PM',
+    amount: 'NGN: 200',
+    paymentStatus: 'Pending Payment',
+    img: require('./Icons/man.png'),
+  },
+  {
+    id: 4,
+    name: 'JazzCash',
+    time: '6:23 PM',
+    amount: 'NGN: 200',
+    paymentStatus: 'Transaction',
+    img: require('./Icons/man1.png'),
+  },
+  {
+    id: 5,
+    name: 'JazzCash',
+    time: '6:23 PM',
+    amount: 'NGN: 200',
+    paymentStatus: 'Transaction',
+    img: require('./Icons/man.png'),
+  },
+  {
+    id: 6,
+    name: 'JazzCash',
+    time: '6:23 PM',
+    amount: 'NGN: 200',
+    paymentStatus: 'Transaction',
+    img: require('./Icons/man1.png'),
+  },
+];
+
+const App = () => {
+  const groupedData = data.reduce((acc, item) => {
+    if (!acc[item.paymentStatus]) {
+      acc[item.paymentStatus] = [];
+    }
+    acc[item.paymentStatus].push(item);
+    return acc;
+  }, {});
+
+  return (
+    <View style={styles.container}>
+      {Object.entries(groupedData).map(([paymentStatus, items]) => (
+        <View key={paymentStatus} style={styles.dateContainer}>
+          <Text style={styles.dateText}>{paymentStatus}</Text>
+          <Text>3 Jan 2023</Text>
+          {items.map(item => (
+            <View key={item.id} style={styles.itemContainer}>
+              <Image
+                source={item.img}
+                resizeMode="contain"
+                style={styles.img}
+              />
+              <View
+                style={{flex: 0.7, backgroundColor: 'yellow', marginLeft: 10}}>
+                <Text style={styles.itemName}>{item.name}</Text>
+                <Text>{item.time}</Text>
+              </View>
+              <View style={{flex: 0.3, flexDirection: 'row'}}>
+                <Text>NGN: 200</Text>
+                <Text>{'>'}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
+      ))}
+    </View>
+  );
+};
+
+export default App;
