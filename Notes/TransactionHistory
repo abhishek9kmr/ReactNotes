@@ -1,0 +1,188 @@
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from 'react-native';
+
+const data = [
+  {id: 1, title: 'All'},
+  {id: 2, title: 'Sending'},
+  {id: 3, title: 'Receiving'},
+];
+
+const App = () => {
+  const transaction = [
+    {
+      id: 1,
+      name: 'JazzCash',
+      time: '6:23 PM',
+      amount: 'NGN: 200',
+      date: '3 Jan 2023',
+      img: require('./Icons/man.png'),
+    },
+    {
+      id: 2,
+      name: 'JazzCash',
+      time: '6:23 PM',
+      amount: 'NGN: 200',
+      date: '3 Jan 2023',
+      img: require('./Icons/man1.png'),
+    },
+    {
+      id: 3,
+      name: 'JazzCash',
+      time: '6:23 PM',
+      amount: 'NGN: 200',
+      date: '4 Jan 2023',
+      img: require('./Icons/man.png'),
+    },
+    {
+      id: 4,
+      name: 'JazzCash',
+      time: '6:23 PM',
+      amount: 'NGN: 200',
+      date: '4 Jan 2023',
+      img: require('./Icons/man1.png'),
+    },
+    {
+      id: 5,
+      name: 'JazzCash',
+      time: '6:23 PM',
+      amount: 'NGN: 200',
+      date: '5 Jan 2023',
+      img: require('./Icons/man.png'),
+    },
+    {
+      id: 6,
+      name: 'JazzCash',
+      time: '6:23 PM',
+      amount: 'NGN: 200',
+      date: '6 Jan 2023',
+      img: require('./Icons/man1.png'),
+    },
+  ];
+
+  const groupedData = transaction.reduce((acc, item) => {
+    if (!acc[item.date]) {
+      acc[item.date] = [];
+    }
+    acc[item.date].push(item);
+    return acc;
+  }, {});
+
+  const [selectedButton, setSelectedButton] = useState(1);
+
+  const handleButtonPress = id => {
+    setSelectedButton(id);
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.buttonContainer}>
+        {data.map(item => (
+          <TouchableOpacity
+            key={item.id}
+            style={[styles.button, item.id === selectedButton && styles.red]}
+            onPress={() => handleButtonPress(item.id)}>
+            <Text
+              style={[
+                styles.text,
+                item.id === selectedButton && {color: 'white'},
+              ]}>
+              {item.title}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+      <ScrollView>
+        {Object.entries(groupedData).map(([date, items]) => (
+          <View key={date} style={styles.dateContainer}>
+            <Text style={styles.dateText}>{date}</Text>
+            {items.map(item => (
+              <View key={item.id} style={styles.itemContainer}>
+                <Image
+                  source={item.img}
+                  resizeMode="contain"
+                  style={styles.img}
+                />
+                <View
+                  style={{
+                    flex: 0.7,
+                    backgroundColor: 'yellow',
+                    marginLeft: 10,
+                  }}>
+                  <Text style={styles.itemName}>{item.name}</Text>
+                  <Text>{item.time}</Text>
+                </View>
+                <View
+                  style={{
+                    flex: 0.3,
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                    backgroundColor: 'yellow',
+                    height: '100%',
+                  }}>
+                  <Text>NGN: 200</Text>
+                  <Text>{'>'}</Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        ))}
+      </ScrollView>
+    </View>
+  );
+};
+
+export default App;
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    marginTop: 40,
+  },
+  button: {
+    width: 100,
+    height: 40,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    color: 'black',
+    fontSize: 18,
+  },
+  red: {
+    backgroundColor: 'red',
+  },
+  dateContainer: {
+    marginTop: 10,
+  },
+  dateText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  itemContainer: {
+    marginVertical: 5,
+    flexDirection: 'row',
+    padding: 10,
+    backgroundColor: 'pink',
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  itemName: {
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  img: {height: 40, width: 40},
+});
