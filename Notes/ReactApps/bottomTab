@@ -1,0 +1,144 @@
+// import * as React from 'react';
+// import {Button, View, Text} from 'react-native';
+// import {NavigationContainer} from '@react-navigation/native';
+// import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+// function HomeScreen({navigation}) {
+//   return (
+//     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+//       <Text>Home Screen</Text>
+//       <Button
+//         title="Go to Details"
+//         onPress={() => navigation.navigate('Details')}
+//       />
+//     </View>
+//   );
+// }
+
+// function DetailsScreen() {
+//   return (
+//     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+//       <Text>Details Screen</Text>
+//     </View>
+//   );
+// }
+
+// const Stack = createNativeStackNavigator();
+
+// function App() {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator initialRouteName="Home">
+//         <Stack.Screen name="Home" component={HomeScreen} />
+//         <Stack.Screen name="Details" component={DetailsScreen} />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }
+
+// export default App;
+
+import * as React from 'react';
+import {Image, Text, View} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+function Home() {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Home!</Text>
+    </View>
+  );
+}
+
+function Work() {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Work!</Text>
+    </View>
+  );
+}
+
+function Updates() {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Updates!</Text>
+    </View>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
+  return (
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        tabBarActiveTintColor: 'green',
+        tabBarInactiveTintColor: 'red',
+      }}>
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({focused, color, size}) => (
+            // <MaterialCommunityIcons name="home" color={color} size={size} />
+            <Image
+              source={require('../ProjectTest/Icons/home.png')}
+              style={{
+                height: 30,
+                width: 30,
+                tintColor: focused ? 'green' : 'red',
+              }}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Updates"
+        component={Updates}
+        options={{
+          tabBarLabel: 'Updates',
+          tabBarIcon: ({focused, color, size}) => (
+            // <MaterialCommunityIcons name="bell" color={color} size={size} />
+            <Image
+              source={require('../ProjectTest/Icons/work.png')}
+              style={{
+                height: 30,
+                width: 30,
+                tintColor: focused ? 'green' : 'red',
+              }}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Work"
+        component={Work}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({focused, color, size}) => (
+            // <MaterialCommunityIcons name="account" color={color} size={size} />
+            <Image
+              source={require('../ProjectTest/Icons/calander.png')}
+              style={{
+                height: 30,
+                width: 30,
+                tintColor: focused ? 'green' : 'red',
+              }}
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>
+  );
+}
