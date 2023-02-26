@@ -1,0 +1,72 @@
+//To create multiple screens under one tab in React Native, you can use a Stack.Navigator component within a Tab.Screen component.
+
+//Here's an example code snippet:
+
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Text, View } from 'react-native';
+
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+const HomeScreen = () => (
+  <View>
+    <Text>This is the Home screen</Text>
+  </View>
+);
+
+const ProfileScreen = () => (
+  <View>
+    <Text>This is the Profile screen</Text>
+  </View>
+);
+
+const SettingsScreen = () => (
+  <View>
+    <Text>This is the Settings screen</Text>
+  </View>
+);
+
+const HomeStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Home" component={HomeScreen} />
+    {/* Add additional screens here */}
+  </Stack.Navigator>
+);
+
+const ProfileStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Profile" component={ProfileScreen} />
+    {/* Add additional screens here */}
+  </Stack.Navigator>
+);
+
+const App = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="Profile" component={ProfileStack} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+      {/* Add additional tabs here */}
+    </Tab.Navigator>
+  );
+};
+
+export default App;
+
+//In this example, we use the createBottomTabNavigator function to create a Tab.Navigator component with three tabs: Home, Profile, and Settings.
+
+//We define three screen components: HomeScreen, ProfileScreen, and SettingsScreen.
+
+//We then define two Stack.Navigator components: HomeStack and ProfileStack. Each Stack.Navigator contains one or more Stack.Screen components, which define the screens for that stack.
+
+//We use the Tab.Screen component to define each tab, and set the name and component props to the name of the tab and the stack component for that tab, respectively.
+
+//In this example, we set the name prop to 'Home' and the component prop to HomeStack for the Home tab, and similarly for the Profile tab. We set the name prop to 'Settings' and the component prop to SettingsScreen for the Settings tab.
+
+//You can add additional tabs and screens as needed, and customize the names and components to suit your needs.
+
+
+
+
