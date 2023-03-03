@@ -1,0 +1,159 @@
+import React, {useEffect, useState} from 'react';
+import {FlatList, View, StyleSheet, TouchableOpacity} from 'react-native';
+import { Colors } from '../themes/Themes';
+import normalize from '../utils/helpers/normalize';
+import PropTypes from 'prop-types';
+
+let st = null;
+let crIndex = 0;
+export default function Slider(props) {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const flatRef = React.useRef();
+
+  useEffect(() => {
+    if(props.automatic == true){
+      clearTimeout(st);
+      onViewRef.current({viewableItems:[{index:0}]})
+    }
+  }, [props.data]);
+
+  const onViewRef = React.useRef(viewableItems => {
+    if (viewableItems.viewableItems[0]) {
+      setActiveSlide(viewableItems.viewableItems[0].index);
+      if (props.automatic == true) {
+        const _len = flatRef?.current?.props?.data?.length;
+        clearTimeout(st);
+        if (_len > 1) {
+          st = setTimeout(() => {
+            const _len = flatRef?.current?.props?.data?.length;
+            let dLength = _len - 1;
+            crIndex = viewableItems.viewableItems[0].index;
+            if (dLength > 0) {
+              if (flatRef && flatRef.current) {
+                if (dLength == crIndex) {
+                  flatRef.current.scrollToIndex({index: 0});
+                } else {
+                  if (crIndex + 1 <= dLength) {
+                    flatRef.current.scrollToIndex({
+                      index: crIndex ? crIndex + 1 : 1,
+                    });
+                  } else {
+                    flatRef.current.scrollToIndex({
+                      index: 0,
+                    });
+                  }
+                }
+              }
+            }
+          }, 4000);
+        }
+      }
+      props.currnetIndex(viewableItems.viewableItems[0].index);
+    }
+  });
+  const viewConfigRef = React.useRef({
+    viewAreaCoveragePercentThreshold: props.scroll,
+  });
+  return (
+    <View style={[style.sliderContainer, props.sliderStyle]}>
+      <FlatList
+        ref={flatRef}
+        horizontal
+        bounces={props.bounces}
+        pagingEnabled={props.pagination}
+        legacyImplementation={false}
+        onViewableItemsChanged={onViewRef.current}
+        keyExtractor={(_, index) => index.toString()}
+        viewabilityConfig={viewConfigRef.current}
+        showsHorizontalScrollIndicator={false}
+        data={props.data}
+        renderItem={({item, index}) => props.renderItem(item, index)}
+      />
+      {props.paginationShow == true ? (
+        <View style={[style.pagination, props.paginationStyle]}>
+          {((_, index) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => flatRef?.current?.scrollToIndex({index: index})}
+              style={[
+                style.paginationItem,
+                activeSlide == index ? style.active : null,
+              ]}></TouchableOpacity>
+          ))}
+        </View>
+      ) : null}
+    </View>
+  );
+}
+
+Slider.propTypes = {
+  data: PropTypes.array,
+  renderItem: PropTypes.func,
+  pagination: PropTypes.bool,
+  paginationShow: PropTypes.bool,
+  paginationStyle: PropTypes.object,
+  sliderStyle: PropTypes.object,
+  currnetIndex: PropTypes.func,
+  scroll: PropTypes.number,
+  bounces: PropTypes.bool,
+  automatic: PropTypes.bool,
+};
+
+Slider.defaultProps = {
+  data: [],
+  pagination: false,
+  paginationShow: false,
+  renderItem: () => {},
+  paginationStyle: {},
+  sliderStyle: {},
+  currnetIndex: () => {},
+  scroll: 20,
+  bounces: true,
+  automatic: false,
+};
+
+const style = StyleSheet.create({
+  sliderContainer: {
+    overflow: 'hidden',
+  },
+  pagination: {
+    height: normalize(25),
+    display: 'flex',
+    flexDirection: 'row',
+    paddingLeft: normalize(20),
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  paginationItem: {
+    height: normalize(3),
+    width: normalize(12),
+    backgroundColor: Colors.lightGrey2,
+    marginRight: normalize(5),
+    borderRadius: normalize(50),
+  },
+  active: {
+    backgroundColor: Colors.primaryPink,
+  },
+});
+===============================================
+
+ <Slider
+                    data={offerImg}
+                    scroll={20}
+                    pagination={true}
+                    paginationShow={true}
+                    pagingEnabled={true}
+                    renderItem={data => {
+                        return (
+                            data && (
+                                <Image
+                                    source={data?.img}
+                                    style={styles.offerImg}
+                                    resizeMode='contain'
+                                />
+                            )
+                        );
+                    }}
+                />
+                
+                
