@@ -20,6 +20,7 @@ console.log(fruits); //[ 'Banana', 'Orange', 'Kiwi' ]
 //findIndex
 //The findIndex() method executes a function for each array element.
 //The findIndex() method returns the index (position) of the first element that passes a test.
+//Note - don't get confuse findIndex with indexOf in javascript.
 
 const fruits = ['apple', 'orange', 'pineapple', 'orange'];
 const idx = fruits.findIndex(a => a === 'orange');
