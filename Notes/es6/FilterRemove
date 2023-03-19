@@ -1,0 +1,39 @@
+//Removing one element from an array
+
+const fruits = ['apple', 'orange', 'pineapple', 'orange'];
+fruits.splice(
+  fruits.findIndex(a => a === 'orange'),
+  1,
+);
+console.log(fruits); //[ 'apple', 'pineapple', 'orange' ]
+
+
+// Explain splice
+//Splice first parameter is the index from which removal of element will start
+//Splice second parameter is the number of elements which will be removed from the array.
+//Slice is used to get a new array from the original array whereas the splice is used to add/remove items in the original array.
+
+const fruits = ['Banana', 'Orange', 'Apple', 'Mango', 'Kiwi'];
+fruits.splice(2, 2);
+console.log(fruits); //[ 'Banana', 'Orange', 'Kiwi' ]
+
+//findIndex
+//The findIndex() method executes a function for each array element.
+//The findIndex() method returns the index (position) of the first element that passes a test.
+
+const fruits = ['apple', 'orange', 'pineapple', 'orange'];
+const idx = fruits.findIndex(a => a === 'orange');
+console.log(idx); //1
+
+//Filter method
+//The filter() method creates a new array filled with elements that pass a test provided by a function.
+
+const ages = [32, 33, 16, 40];
+const result = ages.filter(a => a !== 32);
+console.log(result); // [ 32 ]
+
+//Another example
+
+const ages = [32, 33, 16, 40];
+const result = ages.filter(a => a > 32);
+console.log(result); // [ 33, 40 ]
