@@ -1,0 +1,35 @@
+//Normalize
+
+import { PixelRatio, Platform, Dimensions } from "react-native";
+
+const scale = (Dimensions.get("window").width / 320);
+
+export default normalize = (size) => {
+
+    const newSize = size * scale
+
+    return Math.round(PixelRatio.roundToNearestPixel(newSize))
+
+}
+
+//Horizontal Scale and Vertical Scale
+
+import {Dimensions} from 'react-native';
+
+const {width, height} = Dimensions.get('window');
+
+const guidelineBaseWidth = 375;
+const guidelineBaseHeight = 812;
+
+const horizontalScale = size => (width / guidelineBaseWidth) * size;
+const verticalScale = size => (height / guidelineBaseHeight) * size;
+const moderateScale = (size, factor = 0.5) =>
+  size + (horizontalScale(size) - size) * factor;
+
+export {horizontalScale, verticalScale, moderateScale};
+
+
+//Dimensions
+
+const screenWidth = Dimensions.get('screen').width;
+const screenHeight = Dimensions.get('screen').height;
