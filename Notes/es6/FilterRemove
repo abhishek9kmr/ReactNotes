@@ -38,3 +38,10 @@ console.log(result); // [ 32 ]
 const ages = [32, 33, 16, 40];
 const result = ages.filter(a => a > 32);
 console.log(result); // [ 33, 40 ]
+
+//Another example
+
+const arr = [{id: 1, name: 'Abhishek'}, {id: 2, name: 'Tukku'}, {id: 3, name: 'Rahul'}, ]
+const filArr = arr.filter(a=>a.id !== 2 );
+console.log(filArr);
+
