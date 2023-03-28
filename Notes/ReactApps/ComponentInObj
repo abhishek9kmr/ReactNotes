@@ -1,0 +1,32 @@
+const screens = [
+    {
+      id: 1,
+      txt: 'Screen 1',
+      component: () => <Text>hi</Text>,
+    },
+    {
+      id: 2,
+      txt: 'Screen 2',
+      component: () => <Text>hello</Text>,
+    },
+    {
+      id: 3,
+      txt: 'Screen 3',
+      component: () => <Text>happy</Text>,
+    },
+  ];
+  return (
+    <View>
+      {screens.map(
+        item => {
+          return (
+            <View>
+              {item.component()}
+            </View>
+          );
+        },
+
+        //
+      )}
+    </View>
+  );
