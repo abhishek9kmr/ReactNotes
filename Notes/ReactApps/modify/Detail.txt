@@ -1,0 +1,512 @@
+import React from 'react';
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  FlatList,
+  Platform,
+} from 'react-native';
+import SafeView from '../../components/common/SafeView';
+import HalfButton from '../../components/HalfButton';
+import Header from '../../components/Header';
+import OutlineButton from '../../components/OutlineButton';
+import Fonts from '../../themes/Fonts';
+import Icons from '../../themes/Icons';
+import {Colors} from '../../themes/Themes';
+import {horizontalScale, verticalScale} from '../../utils/helpers/dimen1';
+import normalize from '../../utils/helpers/normalize';
+import {DefaultTheme} from '@react-navigation/native';
+
+const DATA = [
+  {
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    title: 'First Item',
+    name: 'Agnes Remi',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ornare convallis sit eleifend donec consequat fusce volutpat. Facilisis ipsum dui mauris vel.',
+    rating: '4.5',
+    img: require('../../assets/images/person3.png'),
+    starImg: require('../../assets/icons/star.png'),
+    halfStar: require('../../assets/icons/halfStar.png'),
+    days: '2 days ago',
+  },
+  {
+    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    title: 'Second Item',
+    name: 'Agnes Remi',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ornare convallis sit eleifend donec consequat fusce volutpat. Facilisis ipsum dui mauris vel.',
+    rating: '4.5',
+    img: require('../../assets/images/person3.png'),
+    starImg: require('../../assets/icons/star.png'),
+    halfStar: require('../../assets/icons/halfStar.png'),
+    days: '2 days ago',
+  },
+  {
+    id: '58694a0f-3da1-471f-bd96-145571e29d72',
+    title: 'Third Item',
+    name: 'Agnes Remi',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ornare convallis sit eleifend donec consequat fusce volutpat. Facilisis ipsum dui mauris vel.',
+    rating: '4.5',
+    img: require('../../assets/images/person3.png'),
+    starImg: require('../../assets/icons/star.png'),
+    halfStar: require('../../assets/icons/halfStar.png'),
+    days: '2 days ago',
+  },
+  {
+    id: '58694a0f-3da1-471f-bd96-145571e29d80',
+    title: 'Third Item',
+    name: 'Agnes Remi',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ornare convallis sit eleifend donec consequat fusce volutpat. Facilisis ipsum dui mauris vel.',
+    rating: '4.5',
+    img: require('../../assets/images/person3.png'),
+    starImg: require('../../assets/icons/star.png'),
+    halfStar: require('../../assets/icons/halfStar.png'),
+    days: '2 days ago',
+  },
+];
+
+const Item = ({
+  title,
+  img,
+  name,
+  starImg,
+  halfStar,
+  rating,
+  days,
+  description,
+}) => (
+  <View style={styles.item}>
+    <View>
+      {/* style={{
+        flexDirection: 'row',
+        height: normalize(50),
+        width: '100%',
+        backgroundColor: 'yellow',
+        justifyContent: 'space-between',
+      }}> */}
+      <View style={styles.listRow}>
+        <Image source={img} style={styles.profileImg} />
+        <View style={{marginLeft: normalize(5)}}>
+          <Text style={styles.listName}>{name}</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              marginTop: normalize(3),
+              alignItems: 'center',
+            }}>
+            <Image source={starImg} style={styles.starContainer} />
+            <Image source={starImg} style={styles.starContainer} />
+            <Image source={starImg} style={styles.starContainer} />
+            <Image source={starImg} style={styles.starContainer} />
+            <Image source={halfStar} style={styles.starContainer} />
+            <Text style={styles.ratingTxt}>{rating}</Text>
+          </View>
+        </View>
+        <View style={styles.daysContainer}>
+          <Text style={{color: Colors.lightGrey}}>{days}</Text>
+        </View>
+      </View>
+    </View>
+    <Text style={styles.descriptionTxt}>{description}</Text>
+  </View>
+);
+
+const Detail = props => {
+  return (
+    <SafeView backgroundColor={Colors.white}>
+      <Header headerTxt="Service Provider Detail" />
+      <ScrollView
+        bounces={false}
+        showsVerticalScrollIndicator={false}
+        backgroundColor={DefaultTheme.colors.background}>
+        {/* <View> */}
+        <View style={styles.scrollContainer}>
+          <View style={styles.headImgContainer}>
+            <Image
+              source={require('../../assets/images/mechanic3.png')}
+              style={styles.landscape}
+              resizeMode="contain"
+            />
+          </View>
+
+          <View style={styles.johnRow}>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.johnTxt}>John Doe</Text>
+              <Image
+                source={require('../../assets/icons/verified.png')}
+                style={styles.verified}
+                resizeMode="cover"
+              />
+            </View>
+            <Image
+              source={require('../../assets/images/mechanicTxt.png')}
+              style={styles.serviceTxt}
+              resizeMode="cover"
+            />
+          </View>
+          <Text style={styles.autoMechTxt}>Professional Auto Mechanic</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              marginBottom: normalize(10),
+              alignItems: 'center',
+            }}>
+            <Image
+              source={require('../../assets/icons/star.png')}
+              style={styles.star}
+              resizeMode="cover"
+            />
+            <Image
+              source={require('../../assets/icons/star.png')}
+              style={styles.star}
+              resizeMode="cover"
+            />
+            <Image
+              source={require('../../assets/icons/star.png')}
+              style={styles.star}
+              resizeMode="cover"
+            />
+            <Image
+              source={require('../../assets/icons/star.png')}
+              style={styles.star}
+              resizeMode="cover"
+            />
+            <Image
+              source={require('../../assets/icons/halfStar.png')}
+              style={styles.star}
+              resizeMode="cover"
+            />
+            <Text
+              style={{
+                fontFamily: Fonts.Roboto_Regular,
+                fontSize: normalize(12),
+                color: Colors.lightGrey,
+                marginLeft: horizontalScale(5),
+              }}>
+              4.5
+            </Text>
+            <Image
+              source={Icons.bookmarkOutline}
+              style={{
+                height: normalize(15),
+                width: normalize(15),
+                resizeMode: 'contain',
+                marginLeft: horizontalScale(10),
+              }}
+            />
+            <Text
+              style={{
+                fontFamily: Fonts.Roboto_Regular,
+                fontSize: normalize(12),
+                color: Colors.lightGrey,
+                marginLeft: horizontalScale(5),
+              }}>
+              Add to My Workers
+            </Text>
+          </View>
+          <View style={styles.calendarRow}>
+            <View style={styles.detailBox}>
+              <Image
+                source={require('../../assets/icons/greenCalander.png')}
+                style={styles.greenLogo}
+                resizeMode="cover"
+              />
+              <Text style={styles.boxTxt}>8:00-9:00 AM, 09 Dec</Text>
+            </View>
+            <View style={styles.detailBox}>
+              <Image
+                source={require('../../assets/icons/greenPhone.png')}
+                style={styles.greenLogo}
+                resizeMode="cover"
+              />
+              <Text style={styles.boxTxt}>+92 321 1256 123</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '100%',
+              marginBottom: normalize(15),
+            }}>
+            <View style={styles.detailBox}>
+              <Image
+                source={require('../../assets/icons/greenLocation.png')}
+                style={styles.greenLogo}
+                resizeMode="cover"
+              />
+              <Text style={styles.boxTxt}>Prince Nigeria Street</Text>
+            </View>
+            <View style={styles.detailBox}>
+              <Image
+                source={require('../../assets/icons/greenMail.png')}
+                style={styles.greenLogo}
+                resizeMode="cover"
+              />
+              <Text style={styles.boxTxt}>abcdesf@gmail.com</Text>
+            </View>
+          </View>
+          <View style={styles.line}></View>
+          <Text style={styles.subHead}>Skills</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              marginVertical: normalize(10),
+              justifyContent: 'space-around',
+            }}>
+            <View style={styles.pinkTxtBg}>
+              <Text style={styles.pinkTxt}>Repairing</Text>
+            </View>
+            <View style={styles.pinkTxtBg}>
+              <Text style={styles.pinkTxt}>Painting</Text>
+            </View>
+            <View style={styles.pinkTxtBg}>
+              <Text style={styles.pinkTxt}>Building</Text>
+            </View>
+            <View style={styles.pinkTxtBg}>
+              <Text style={styles.pinkTxt}>Custom Design</Text>
+            </View>
+          </View>
+        </View>
+        <View style={{paddingHorizontal: verticalScale(10)}}>
+          <Text style={styles.subHead}>About</Text>
+          <View style={styles.aboutTxtContainer}>
+            <Text style={{color: Colors.lightGrey}}>
+              Lorem ipsum dolor sit amet consectetur. Lectus dignissim interdum
+              purus adipiscing. Pulvinar nulla non nulla felis. Condimentum
+              nulla diam at amet ac amet quam vel. Arcu ut diam praesent
+              egestas. Placerat blandit phasellus urna sed. Auctor lacus egestas
+              leo in. Nunc purus dignissim consectetur vitae dictum purus orci
+              tincidunt. Mauris.
+            </Text>
+          </View>
+          <Image
+            source={require('../../assets/images/groupPic.png')}
+            style={styles.group}
+            resizeMode="cover"
+          />
+          <Text style={styles.subHead}>Reviews</Text>
+          <View style={{width: '100%'}}>
+            <FlatList
+              data={DATA}
+              renderItem={({item}) => (
+                <Item
+                  title={item.title}
+                  img={item.img}
+                  name={item.name}
+                  starImg={item.starImg}
+                  halfStar={item.halfStar}
+                  rating={item.rating}
+                  days={item.days}
+                  description={item.description}
+                />
+              )}
+              keyExtractor={item => item.id}
+              scrollEnabled={false}
+              style={{marginBottom: verticalScale(150)}}
+            />
+          </View>
+        </View>
+
+        {/* </View> */}
+      </ScrollView>
+      <View style={styles.fixBtnContainer}>
+        <OutlineButton
+          buttonTxt="Message"
+          onPress={() => props.navigation.navigate('Chat')}
+        />
+        <HalfButton
+          buttonTxt="Create Job"
+          onPress={() => props.navigation.navigate('CreateOffer')}
+        />
+      </View>
+    </SafeView>
+  );
+};
+
+export default Detail;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // backgroundColor: 'yellow',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    paddingHorizontal: normalize(10),
+    paddingBottom: normalize(20),
+    //backgroundColor: 'yellow'
+  },
+  landscape: {
+    width: '100%',
+    //backgroundColor: 'green',
+    height: normalize(170),
+    //margin: normalize(10),
+    borderRadius: normalize(10),
+    marginVertical: normalize(20),
+  },
+  verified: {
+    height: normalize(20),
+    width: normalize(20),
+    marginHorizontal: normalize(5),
+  },
+  serviceTxt: {
+    width: normalize(65),
+    height: normalize(15),
+  },
+  star: {
+    height: normalize(12),
+    width: normalize(12),
+    margin: normalize(1),
+  },
+  detailBox: {
+    width: normalize(140),
+    height: normalize(35),
+    borderWidth: normalize(0.5),
+    borderColor: Colors.lightGrey2,
+    borderRadius: normalize(5),
+    alignItems: 'center',
+    paddingHorizontal: normalize(5),
+    flexDirection: 'row',
+    backgroundColor: Colors.white,
+  },
+  greenLogo: {
+    height: normalize(15),
+    width: normalize(15),
+    marginRight: normalize(5),
+  },
+  subHead: {
+    fontSize: normalize(15),
+    fontWeight: '600',
+    marginVertical: normalize(8),
+  },
+  group: {
+    width: '100%',
+    height: normalize(435),
+    marginTop: normalize(25),
+  },
+  item: {
+    width: '100%',
+    //backgroundColor: 'pink',//Colors.white,
+    padding: 20,
+    marginVertical: 8,
+    justifyContent: 'flex-start',
+    borderRadius: normalize(8),
+    backgroundColor: Colors.white,
+    // marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
+  listRow: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    width: '100%',
+    alignItems: 'center',
+  },
+  profileImg: {
+    height: normalize(45),
+    width: normalize(45),
+    resizeMode: 'contain',
+  },
+  listName: {fontSize: normalize(15), fontWeight: '600'},
+  starContainer: {
+    height: normalize(14),
+    width: normalize(14),
+    marginRight: normalize(3),
+  },
+  ratingTxt: {
+    color: Colors.lightGrey,
+    fontSize: normalize(12),
+    marginHorizontal: normalize(2),
+  },
+  daysContainer: {
+    width: normalize(110),
+    height: '100%',
+    alignItems: 'flex-end',
+  },
+  descriptionTxt: {
+    margin: normalize(10),
+    fontSize: normalize(12),
+    color: Colors.lightGrey,
+  },
+  scrollContainer: {
+    backgroundColor: DefaultTheme.colors.background,
+    paddingHorizontal: horizontalScale(10),
+    paddingBottom: verticalScale(10),
+  },
+  headImgContainer: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    width: horizontalScale(355),
+  },
+  johnRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    alignItems: 'center',
+  },
+  johnTxt: {fontSize: normalize(17), fontWeight: '500'},
+  autoMechTxt: {color: Colors.lightGrey, margin: normalize(3)},
+  calendarRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: normalize(15),
+  },
+  boxTxt: {color: Colors.lightGrey, fontSize: normalize(9)},
+  line: {
+    height: normalize(2),
+    width: '100%',
+    borderBottomColor: Colors.lightGrey2,
+    borderBottomWidth: 0.2,
+    //marginLeft: normalize(10),
+  },
+  pinkTxtBg: {
+    backgroundColor: '#Fdd9e5',
+    //marginRight: horizontalScale(15),
+    paddingVertical: verticalScale(3),
+    paddingHorizontal: horizontalScale(5),
+    borderRadius: normalize(10),
+  },
+  pinkTxt: {
+    color: Colors.primaryPink,
+    fontWeight: '600',
+    fontSize: normalize(9),
+  },
+  aboutTxtContainer: {
+    backgroundColor: Colors.white,
+    padding: normalize(15),
+    borderRadius: normalize(5),
+  },
+  fixBtnContainer: {
+    height: Platform.OS == 'ios' ? normalize(100) : normalize(70),
+    marginTop: normalize(20),
+    borderTopLeftRadius: normalize(20),
+    borderTopRightRadius: normalize(20),
+    borderColor: Colors.lightGrey2,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'flex-start',
+    borderBottomColor: Colors.white,
+    paddingVertical: normalize(20),
+    backgroundColor: Colors.white,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
+
+    elevation: 24,
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    borderWidth: 0.5,
+  },
+});

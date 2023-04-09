@@ -1,0 +1,469 @@
+import { DefaultTheme } from '@react-navigation/native';
+import React, {useState} from 'react';
+import {
+  View,
+  Switch,
+  StyleSheet,
+  Text,
+  Image,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
+import SafeView from '../../components/common/SafeView';
+import Header from '../../components/Header';
+import Fonts from '../../themes/Fonts';
+import {Colors} from '../../themes/Themes';
+import {horizontalScale, verticalScale} from '../../utils/helpers/dimen1';
+import normalize from '../../utils/helpers/normalize';
+
+const Search = ({navigation}) => {
+  const serviceList = [
+    {
+      id: '1',
+      name: 'John Doe',
+      description:
+        'Lorem ipsum dolor sit amet, conse ctetur adipiscing, sed do eiusmo',
+      rating: '4.8',
+      location: 'Abuja, Nigeria',
+      img: require('../../assets/images/electrician2.png'),
+      img2: require('../../assets/images/electricianTxt.png'),
+    },
+    {
+      id: '2',
+      name: 'John Doe',
+      description:
+        'Lorem ipsum dolor sit amet, conse ctetur adipiscing, sed do eiusmo',
+      rating: '4.8',
+      location: 'Abuja, Nigeria',
+      img: require('../../assets/images/electrician2.png'),
+      img2: require('../../assets/images/electricianTxt.png'),
+    },
+    {
+      id: '3',
+      name: 'John Doe',
+      description:
+        'Lorem ipsum dolor sit amet, conse ctetur adipiscing, sed do eiusmo',
+      rating: '4.8',
+      location: 'Abuja, Nigeria',
+      img: require('../../assets/images/electrician2.png'),
+      img2: require('../../assets/images/electricianTxt.png'),
+    },
+  ];
+
+  const Item = ({name, img, rating, description, location, img2}) => (
+    <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
+      <View style={styles.item}>
+        <Image source={img} style={styles.serviceImg} resizeMode="contain" />
+        <View style={{marginLeft: normalize(8)}}>
+          <View style={styles.detail}>
+            <View style={{flexDirection: 'row',alignItems: 'center'}}>
+              <Text style={styles.title}>{name}</Text>
+              <Image
+                source={require('../../assets/icons/verified.png')}
+                style={styles.verified}
+                resizeMode="contain"
+              />
+            </View>
+            <Image source={img2} style={styles.img2} resizeMode="contain" />
+          </View>
+          <View style={{flexDirection: 'row', height: normalize(18)}}>
+            <Image
+              source={require('../../assets/icons/star.png')}
+              style={styles.star}
+              resizeMode="contain"
+            />
+            <Text style={styles.ratingContainer}>({rating})</Text>
+          </View>
+          <View style={{width: normalize(190)}}>
+            <Text style={{color: '#9C9C9C'}}>{description}</Text>
+          </View>
+          <View style={styles.locationContainer}>
+            <Image
+              source={require('../../assets/icons/location.png')}
+              style={styles.location}
+              resizeMode="contain"
+            />
+            <Text style={{color: '#6C6C6C', fontFamily: Fonts.Roboto_Regular}}>{location}</Text>
+          </View>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+
+  return (
+    <SafeView backgroundColor={Colors.white}>
+      <Header headerTxt={'Search'} />
+      <ScrollView bounces={false} backgroundColor={DefaultTheme.colors.background}
+      showsVerticalScrollIndicator={false}>
+        <View style={styles.searchContainer}>
+          <View style={styles.searchInput}>
+            <Text style={{color: Colors.lightGrey, fontSize: normalize(11)}}>
+              Electrician
+            </Text>
+            <Image
+              source={require('../../assets/icons/cross.png')}
+              style={styles.cross}
+            />
+          </View>
+          <View style={{flexDirection: 'row', marginTop: normalize(8)}}>
+            <Text style={styles.searchTxt}>Search Results for</Text>
+            <Text style={styles.electrician}> Electrician</Text>
+          </View>
+        </View>
+        <View style={styles.bannerContainer}>
+          <Image
+            source={require('../../assets/images/odaniElectrician.png')}
+            style={styles.bannerImg}></Image>
+          <View style={styles.bannerTxtContainer}>
+            <View style={{flex: 0.4, justifyContent: 'center'}}>
+              <Text style={styles.odaniTitle}>Odani Electrical Services</Text>
+            </View>
+            <View style={{flex: 0.25, justifyContent: 'center'}}>
+              <Text style={styles.odaniDes}>
+                dedicated to quality and professionalism
+              </Text>
+            </View>
+
+            <View style={styles.learnFlex}>
+              <View style={styles.learnContainer}>
+                <Text style={styles.learn}>LEARN MORE</Text>
+              </View>
+            </View>
+
+            <View style={{flex: 0.15}}>
+              <View style={styles.dotContainer}>
+                <View style={styles.dot} />
+                <View style={styles.dot} />
+                <View
+                  style={{...styles.dot, backgroundColor: Colors.lightGrey}}
+                />
+              </View>
+            </View>
+          </View>
+        </View>
+        <View style={styles.featuredContainer}>
+          <Text style={{fontSize: normalize(14), fontWeight: '500', color: '#242628', fontFamily: Fonts.Inter_Regular}}>
+            Featured Electricians
+          </Text>
+          <Text style={{color: Colors.primaryPink, fontFamily: Fonts.Inter_Regular}}>See All</Text>
+        </View>
+        <View style={styles.horizontalItem}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            {Array(3)
+              .fill()
+              .map((d, idx) => (
+                <View key={idx} style={styles.itemContainer}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}>
+                    <Text
+                      style={{color: Colors.primaryPink, fontWeight: '500', fontFamily: Fonts.Inter_Regular}}>
+                      Electrician
+                    </Text>
+                    <View style={{width: horizontalScale(60)}}>
+                      <View style={styles.horizontalImg}></View>
+                      <View style={styles.flatlistRating}>
+                        <Image
+                          source={require('../../assets/icons/star.png')}
+                          style={{height: normalize(14), width: normalize(14)}}
+                        />
+                        <Text style={styles.ratingVal}>{'  (4.9)'}</Text>
+                      </View>
+                    </View>
+                  </View>
+                  <Text style={styles.olaide}>Olaide Kola</Text>
+                  <View style={{flexDirection: 'row'}}>
+                    <Image
+                      source={require('../../assets/images/batch.png')}
+                      style={styles.batch}
+                    />
+                    <Image
+                      source={require('../../assets/images/shieldTick.png')}
+                      style={styles.batch}
+                    />
+                    <Image
+                      source={require('../../assets/images/batchTick.png')}
+                      style={styles.batch}
+                    />
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      paddingTop: verticalScale(10),
+                      alignItems: 'center',
+                    }}>
+                    <Image
+                      source={require('../../assets/icons/location.png')}
+                      style={{
+                        height: normalize(12),
+                        width: normalize(12),
+                        resizeMode: 'contain',
+                      }}></Image>
+                    <Text
+                      style={styles.mabushiTxt}>
+                      Mabushi, FCT
+                    </Text>
+                  </View>
+                </View>
+              ))}
+          </ScrollView>
+        </View>
+        <View
+          style={styles.topRatedTxt}>
+          <Text style={{fontSize: normalize(14), fontWeight: '500', fontFamily: Fonts.Inter_Regular, color: '#242628'}}>
+            Top-Rated Electricians near You
+          </Text>
+        </View>
+        <View style={styles.container}>
+          <FlatList
+            data={serviceList}
+            renderItem={({item}) => (
+              <Item
+                name={item.name}
+                img={item.img}
+                rating={item.rating}
+                description={item.description}
+                location={item.location}
+                img2={item.img2}
+              />
+            )}
+            keyExtractor={item => item.id}
+            scrollEnabled={false}
+          />
+        </View>
+        <View style={{marginBottom: verticalScale(100)}}></View>
+      </ScrollView>
+    </SafeView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginBottom: normalize(20),
+    //marginTop: StatusBar.currentHeight || 0,
+  },
+  item: {
+    flexDirection: 'row',
+    backgroundColor: Colors.white,
+    padding: normalize(10),
+    marginVertical: 5,
+    marginHorizontal: normalize(10),
+    borderRadius: normalize(10),
+  },
+  title: {
+    fontSize: normalize(14),
+    fontWeight: '600',
+    fontFamily: Fonts.Roboto_Regular,
+    color: '#121D32'
+  },
+  serviceImg: {
+    height: normalize(90),
+    width: normalize(90),
+    //backgroundColor: 'pink'
+  },
+  detail: {
+    flexDirection: 'row',
+    //backgroundColor: 'yellow',
+    justifyContent: 'space-between',
+  },
+  verified: {
+    height: normalize(15),
+    width: normalize(15),
+    marginLeft: normalize(3),
+  },
+  serviceTxt: {
+    //backgroundColor: 'pink',
+    width: normalize(40),
+    //alignContent:
+    //alignSelf: 'center'
+
+    //width: normali
+  },
+  star: {
+    height: normalize(10),
+    width: normalize(10),
+  },
+  location: {
+    height: normalize(12),
+    width: normalize(12),
+    marginRight: normalize(4)
+  },
+  img2: {
+    width: normalize(55),
+    height: normalize(20),
+    marginRight: normalize(5),
+    //backgroundColor: 'yellow'
+  },
+  ratingContainer: {
+    fontSize: normalize(9),
+    marginLeft: normalize(2),
+    color: Colors.lightGrey,
+  },
+  locationContainer: {
+    height: normalize(20),
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: normalize(6),
+  },
+  searchContainer: {
+    backgroundColor: Colors.white,
+    marginTop: verticalScale(15),
+    marginHorizontal: horizontalScale(15),
+    paddingTop: verticalScale(20),
+    paddingHorizontal: horizontalScale(20),
+    borderRadius: normalize(8),
+    paddingBottom: verticalScale(15),
+  },
+  searchInput: {
+    //height: verticalScale(20),
+    borderWidth: 0.5,
+    borderColor: Colors.black,
+    paddingLeft: horizontalScale(15),
+    paddingRight: horizontalScale(10),
+    paddingVertical: verticalScale(10),
+    borderRadius: normalize(5),
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  cross: {
+    height: normalize(20),
+    width: normalize(20),
+    tintColor: Colors.lightGrey,
+  },
+  searchTxt: {
+    fontSize: normalize(12),
+    fontWeight: '600',
+    color: '#8D99AE',
+  },
+  electrician: {
+    fontSize: normalize(12),
+    fontWeight: '600',
+    color: '#262626',
+    fontFamily: Fonts.Roboto_Regular,
+
+
+  },
+  bannerContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: horizontalScale(15),
+    marginTop: verticalScale(20),
+  },
+  bannerImg: {
+    height: verticalScale(200),
+    width: horizontalScale(138),
+  },
+  bannerTxtContainer: {
+    backgroundColor: Colors.primaryPink,
+    height: verticalScale(200),
+    width: horizontalScale(207),
+    //paddingTop: verticalScale(20),
+    paddingLeft: horizontalScale(15),
+  },
+  odaniTitle: {
+    color: Colors.white,
+    fontSize: normalize(16),
+    fontWeight: '500',
+    letterSpacing: 1.2,
+    fontFamily: Fonts.Inter_Regular,
+  },
+  odaniDes: {
+    color: Colors.white,
+    fontSize: normalize(11),
+    fontWeight: '500',
+    letterSpacing: 1,
+  },
+  learnContainer: {
+    backgroundColor: '#D22238',
+    paddingVertical: verticalScale(10),
+    paddingHorizontal: horizontalScale(20),
+    borderRadius: normalize(15),
+  },
+  learn: {
+    color: Colors.white,
+    fontWeight: '700',
+    fontSize: normalize(10),
+    fontFamily: Fonts.Inter_Regular,
+  },
+  learnFlex: {
+    flex: 0.2,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingRight: horizontalScale(10),
+  },
+  dotContainer: {
+    height: normalize(10),
+    marginTop: verticalScale(5),
+    flexDirection: 'row',
+  },
+  dot: {
+    height: normalize(7),
+    width: normalize(7),
+    backgroundColor: Colors.white,
+    borderRadius: normalize(25),
+    marginHorizontal: horizontalScale(1),
+  },
+  featuredContainer: {
+    flexDirection: 'row',
+    marginVertical: verticalScale(10),
+    marginLeft: horizontalScale(15),
+    marginRight: horizontalScale(15),
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
+  },
+  itemContainer: {
+    backgroundColor: Colors.white,
+    width: horizontalScale(190),
+    marginRight: horizontalScale(10),
+    paddingTop: verticalScale(5),
+    paddingLeft: horizontalScale(10),
+    paddingRight: horizontalScale(5),
+    borderRadius: normalize(5),
+    paddingBottom: verticalScale(10),
+  },
+  flatlistRating: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: verticalScale(5),
+  },
+  olaide: {
+    fontSize: normalize(13),
+    fontWeight: '500',
+    marginTop: verticalScale(-25),
+    fontFamily: Fonts.Inter_Regular,
+    color: '#302E2B'
+  },
+  horizontalItem: {flexDirection: 'row', paddingLeft: horizontalScale(15)},
+  horizontalImg: {
+    height: normalize(45),
+    width: normalize(45),
+    backgroundColor: Colors.gray12,
+    borderRadius: normalize(8),
+    marginLeft: horizontalScale(5),
+  },
+  ratingVal: {
+    color: '#C2C2C2',
+    fontSize: normalize(12),
+  },
+  batch: {
+    height: normalize(18),
+    width: normalize(18),
+    resizeMode: 'contain',
+  },
+  mabushiTxt: {
+    color: Colors.lightGrey,
+    marginLeft: normalize(5),
+    fontFamily: Fonts.Roboto_Regular,
+  },
+  topRatedTxt: {
+    paddingVertical: verticalScale(20),
+    paddingHorizontal: horizontalScale(15),
+    // paddingBottom: verticalScale(15),
+  },
+});
+
+export default Search;

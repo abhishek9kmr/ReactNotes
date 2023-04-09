@@ -1,0 +1,416 @@
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  Platform,
+} from 'react-native';
+import Modal from 'react-native-modal';
+import {DefaultTheme} from 'react-native-paper';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import SafeView from '../../components/common/SafeView';
+import FullButton from '../../components/FullButton';
+import FullGreyLineButton from '../../components/FullGreyLineButton';
+import GreyLineButton from '../../components/GreyLineButton';
+import HalfButton from '../../components/HalfButton';
+import Header from '../../components/Header';
+import SectionHeading from '../../components/SectionHeading';
+import Fonts from '../../themes/Fonts';
+import {Colors} from '../../themes/Themes';
+import {horizontalScale, verticalScale} from '../../utils/helpers/dimen1';
+import normalize from '../../utils/helpers/normalize';
+
+const JobDetail = ({navigation}) => {
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [cancelRequestModal, setcancelRequestModal] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+    setTimeout(() => {
+      setModalVisible(false);
+    }, 2500);
+  };
+  // const toggleModal2 = () => {
+  //   setcancelRequestModal(!cancelRequestModal);
+  // };
+
+  return (
+    <>
+      <SafeView backgroundColor={Colors.white}>
+        <Header headerTxt="Job Detail" />
+        <ScrollView
+          bounces={false}
+          showsVerticalScrollIndicator={false}
+          backgroundColor={'#F5F5F5'}>
+          <View
+            style={{
+              flexDirection: 'row',
+              height: normalize(50),
+              alignItems: 'center',
+              marginTop: normalize(20),
+              marginBottom: normalize(10),
+              marginHorizontal: normalize(10),
+              backgroundColor: Colors.white,
+              paddingHorizontal: horizontalScale(10),
+              borderRadius: normalize(5),
+              paddingVertical: verticalScale(5),
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 3,
+              },
+              shadowOpacity: 0.27,
+              shadowRadius: 4.65,
+
+              elevation: 6,
+            }}>
+            <View
+              style={{flexDirection: 'row', alignItems: 'center', flex: 0.75}}>
+              <Image
+                source={require('../../assets/images/electrician2.png')}
+                style={styles.person}
+                resizeMode="contain"
+              />
+              <Text
+                style={{
+                  marginLeft: normalize(10),
+                  fontWeight: '600',
+                  fontSize: normalize(14),
+                  fontFamily: Fonts.Roboto_Regular,
+                  color: '#2B2D42',
+                }}>
+                John Doe
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                height: 20,
+                flex: 0.25,
+                justifyContent: 'space-around',
+                alignItems: 'center',
+              }}>
+              <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+                <Image
+                  source={require('../../assets/images/chat.png')}
+                  style={styles.person}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+              <Image
+                source={require('../../assets/images/pinkPhone.png')}
+                style={styles.person}
+                resizeMode="contain"
+              />
+            </View>
+          </View>
+          <Modal isVisible={isModalVisible}>
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '100%',
+                backgroundColor: Colors.white,
+                paddingVertical: normalize(20),
+                borderRadius: normalize(5),
+                paddingHorizontal: normalize(35),
+              }}>
+              <Image
+                source={require('../../assets/icons/submit.png')}
+                style={styles.submitLogo}
+                resizeMode="cover"
+              />
+              <Text style={styles.modalHead}>Cancel Request Submitted</Text>
+              <Text style={styles.modalHead}>Successfully</Text>
+              <Text style={{...styles.modalText, marginTop: normalize(10)}}>
+                Your cancel request has been submitted
+              </Text>
+              <Text style={styles.modalText}>for review</Text>
+            </View>
+          </Modal>
+          {/* <Modal isVisible={cancelRequestModal}>
+            <View style={styles.cancelModal}>
+              <View
+                style={{
+                  height: normalize(40),
+                  borderBottomWidth: 0.5,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  padding: normalize(10),
+                  borderBottomColor: Colors.lightGrey2,
+                  alignItems: 'center'
+                }}>
+                <Text style={styles.cancelReq}>Cancel Request</Text>
+                <TouchableOpacity onPress={toggleModal2}>
+                  <Image
+                    source={require('../../assets/icons/cross.png')}
+                    style={styles.cross}
+                    resizeMode="cover"
+                  />
+                </TouchableOpacity>
+              </View>
+              <View style={{margin: normalize(10)}}>
+                <Text style={{fontFamily: Fonts.Roboto_Regular, fontSize: 14, fontWeight: '600'}}>
+                  Service Type
+                </Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Mechanic"
+                  placeholderTextColor={Colors.lightGrey}
+                />
+                <Text style={{fontFamily: Fonts.Roboto_Regular, fontSize: 14, fontWeight: '600'}}>
+                  Description
+                </Text>
+                <TextInput
+                  style={styles.descriptionInput}
+                  placeholder="Please explain reason for cancelling"
+                  placeholderTextColor={Colors.lightGrey}
+                  multiline={true}
+                />
+                <FullButton
+                  buttonTxt="Submit Request"
+                  onPress={() => {
+                    navigation.navigate('JobDetail1'),
+                      setcancelRequestModal(false);
+                  }}
+                />
+                <View style={{height: normalize(15)}} />
+                <FullGreyLineButton buttonTxt="Cancel" />
+              </View>
+            </View>
+          </Modal> */}
+          <View style={{backgroundColor: Colors.white}}>
+            <Text
+              style={{
+                alignSelf: 'flex-end',
+                marginRight: horizontalScale(15),
+                fontFamily: Fonts.Roboto_Regular,
+                fontSize: normalize(12),
+                fontWeight: '500',
+                color: '#FD8900',
+                marginTop: verticalScale(25),
+                marginBottom: verticalScale(-10),
+              }}>
+              Requested
+            </Text>
+            <Text style={styles.SectionHeading}>Title</Text>
+            <Text style={styles.description}>
+              Lorem ipsum dolor sit amet consectetur Lectus d
+            </Text>
+            <View style={styles.line}></View>
+            <Text style={styles.SectionHeading}>Description</Text>
+            <Text style={styles.description}>
+              Lorem ipsum dolor sit amet consectetur. Lectus dignissim inte rdum
+              purus adipiscing. Pulvinar nulla non nulla felis. Condime ntum
+              nulla diam at amet ac amet quam vel. Arcu ut diam pra esent
+              egestas. Placerat blandit phasellus urna sed. Auctor lacus egestas
+              leo in. Nunc purus dignissim consectetur vitae dictum purus orci
+              tincidunt. Mauris.
+            </Text>
+            <View style={styles.line}></View>
+            <Image
+              source={require('../../assets/images/group2.png')}
+              style={styles.group}
+              resizeMode="stretch"
+            />
+            <View
+              style={{
+                height: normalize(5),
+                width: '95%',
+                borderBottomColor: Colors.lightGrey2,
+                borderBottomWidth: 0.2,
+                marginLeft: normalize(10),
+              }}></View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                width: '100%',
+                marginBottom: normalize(35),
+                marginTop: normalize(15),
+                paddingHorizontal: normalize(10),
+              }}>
+              <View style={styles.detailBox}>
+                <Image
+                  source={require('../../assets/images/pinkCalender.png')}
+                  style={styles.pinkLogo}
+                  resizeMode="cover"
+                />
+                <Text style={{color: Colors.lightGrey, fontSize: normalize(9)}}>
+                  8:00-9:00 AM, 09 Dec
+                </Text>
+              </View>
+              <View style={styles.detailBox}>
+                <Image
+                  source={require('../../assets/images/pinkLocation.png')}
+                  style={styles.pinkLogo}
+                  resizeMode="cover"
+                />
+                <Text style={{color: Colors.lightGrey, fontSize: normalize(9)}}>
+                  Prince Nigeria Street
+                </Text>
+              </View>
+            </View>
+          </View>
+        </ScrollView>
+      </SafeView>
+      <View style={{backgroundColor: Colors.white}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            width: '100%',
+            height:
+              Platform.OS === 'ios' ? verticalScale(100) : verticalScale(80),
+            paddingHorizontal: horizontalScale(13),
+            paddingTop: verticalScale(20),
+            borderTopRightRadius: normalize(20),
+            borderTopLeftRadius: normalize(20),
+            backgroundColor: Colors.white,
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 12,
+            },
+            shadowOpacity: 0.58,
+            shadowRadius: 16.0,
+
+            elevation: 24,
+          }}>
+          <GreyLineButton
+            buttonTxt="Cancel Job"
+            onPress={() => navigation.navigate('JobCancel')}
+          />
+          <HalfButton buttonTxt="Mark Complete" />
+        </View>
+      </View>
+    </>
+  );
+};
+export default JobDetail;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // backgroundColor: 'yellow',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    padding: normalize(10),
+    //backgroundColor: 'yellow'
+  },
+  person: {
+    height: normalize(30),
+    width: normalize(30),
+    borderRadius: normalize(20),
+  },
+  description: {
+    color: Colors.lightGrey,
+    marginHorizontal: normalize(10),
+    fontSize: normalize(10),
+    lineHeight: verticalScale(20),
+  },
+  line: {
+    height: normalize(15),
+    width: '95%',
+    borderBottomColor: Colors.lightGrey2,
+    borderBottomWidth: 0.2,
+    marginLeft: normalize(10),
+    //marginVertical: normalize(10)
+  },
+  group: {
+    width: '100%',
+    height: normalize(215),
+    marginTop: normalize(12),
+    //backgroundColor: 'yellow',
+  },
+  SectionHeading: {
+    fontWeight: '600',
+    fontSize: normalize(12),
+    marginTop: normalize(20),
+    marginLeft: normalize(10),
+    marginBottom: normalize(8),
+    color: '#2B2D42',
+    fontFamily: Fonts.Roboto_Regular,
+  },
+  detailBox: {
+    width: normalize(140),
+    height: normalize(35),
+    borderWidth: normalize(0.5),
+    borderColor: Colors.lightGrey2,
+    borderRadius: normalize(5),
+    alignItems: 'center',
+    paddingLeft: normalize(5),
+    flexDirection: 'row',
+  },
+  pinkLogo: {
+    height: normalize(15),
+    width: normalize(15),
+    marginRight: normalize(5),
+  },
+  submitLogo: {
+    height: normalize(35),
+    width: normalize(35),
+    marginBottom: normalize(10),
+  },
+  modalHead: {
+    fontSize: normalize(14),
+    fontWeight: '500',
+    marginBottom: normalize(5),
+  },
+  modalText: {
+    color: Colors.lightGrey,
+    marginTop: normalize(2),
+    fontSize: normalize(11),
+  },
+  successModal: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    backgroundColor: Colors.white,
+    paddingVertical: normalize(20),
+    borderRadius: normalize(5),
+    paddingHorizontal: normalize(35),
+  },
+  // cancelModal: {
+  //   backgroundColor: Colors.white,
+  //   borderRadius: normalize(5),
+  // },
+  cancelReq: {
+    fontFamily: Fonts.Roboto_Regular,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  cross: {
+    height: normalize(16),
+    width: normalize(16),
+  },
+  input: {
+    width: '100%',
+    borderRadius: normalize(5),
+    backgroundColor: '#D1D1D1',
+    height: normalize(40),
+    paddingHorizontal: normalize(10),
+    borderWidth: normalize(1),
+    borderColor: Colors.lightGrey2,
+    marginVertical: normalize(10),
+    marginBottom: normalize(15),
+  },
+  // descriptionInput: {
+  //   width: '100%',
+  //   borderRadius: normalize(5),
+  //   backgroundColor: Colors.white,
+  //   height: normalize(200),
+  //   padding: normalize(10),
+  //   paddingTop: normalize(15),
+  //   borderWidth: normalize(1),
+  //   borderColor: Colors.lightGrey2,
+  //   marginVertical: normalize(10),
+  //   marginBottom: normalize(15),
+  //   textAlignVertical: 'top',
+  //   multiline: true,
+  // },
+});

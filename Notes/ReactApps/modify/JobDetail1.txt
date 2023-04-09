@@ -1,0 +1,266 @@
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
+import SafeView from '../../components/common/SafeView';
+import FullButton from '../../components/FullButton';
+import Header from '../../components/Header';
+import Fonts from '../../themes/Fonts';
+import {Colors} from '../../themes/Themes';
+import {horizontalScale, verticalScale} from '../../utils/helpers/dimen1';
+import normalize from '../../utils/helpers/normalize';
+
+const JobDetail = ({navigation}) => {
+  return (
+    <>
+      <SafeView backgroundColor={Colors.white}>
+        <Header headerTxt="Job Detail" />
+        <ScrollView
+          bounces={false}
+          showsVerticalScrollIndicator={false}
+          backgroundColor={'#F5F5F5'}>
+          <View
+            style={{
+              flexDirection: 'row',
+              height: normalize(50),
+              alignItems: 'center',
+              marginTop: normalize(20),
+              marginBottom: normalize(10),
+              marginHorizontal: normalize(10),
+              backgroundColor: Colors.white,
+              paddingHorizontal: horizontalScale(10),
+              borderRadius: normalize(5),
+              paddingVertical: verticalScale(5),
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 3,
+              },
+              shadowOpacity: 0.27,
+              shadowRadius: 4.65,
+
+              elevation: 6,
+            }}>
+            <View
+              style={{flexDirection: 'row', alignItems: 'center', flex: 0.75}}>
+              <Image
+                source={require('../../assets/images/electrician2.png')}
+                style={styles.person}
+                resizeMode="contain"
+              />
+              <Text
+                style={{
+                  marginLeft: normalize(10),
+                  fontWeight: '600',
+                  fontSize: normalize(14),
+                  fontFamily: Fonts.Roboto_Regular,
+                  color: '#2B2D42',
+                }}>
+                John Doe
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                height: 20,
+                flex: 0.25,
+                justifyContent: 'space-around',
+                alignItems: 'center',
+              }}>
+              <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+                <Image
+                  source={require('../../assets/images/chat.png')}
+                  style={styles.person}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+              <Image
+                source={require('../../assets/images/pinkPhone.png')}
+                style={styles.person}
+                resizeMode="contain"
+              />
+            </View>
+          </View>
+          <View style={{backgroundColor: Colors.white}}>
+            <Text style={styles.SectionHeading}>Title</Text>
+            <Text style={styles.description}>
+              Lorem ipsum dolor sit amet consectetur Lectus d
+            </Text>
+            <View style={styles.line}></View>
+            <Text style={styles.SectionHeading}>Description</Text>
+            <Text style={styles.description}>
+              Lorem ipsum dolor sit amet consectetur. Lectus dignissim inte rdum
+              purus adipiscing. Pulvinar nulla non nulla felis. Condime ntum
+              nulla diam at amet ac amet quam vel. Arcu ut diam pra esent
+              egestas. Placerat blandit phasellus urna sed. Auctor lacus egestas
+              leo in. Nunc purus dignissim consectetur vitae dictum purus orci
+              tincidunt. Mauris.
+            </Text>
+            <View style={styles.line}></View>
+            <Image
+              source={require('../../assets/images/group2.png')}
+              style={styles.group}
+              resizeMode="stretch"
+            />
+            <View
+              style={{
+                height: normalize(5),
+                width: '95%',
+                borderBottomColor: Colors.lightGrey2,
+                borderBottomWidth: 0.2,
+                marginLeft: normalize(10),
+              }}></View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                width: '100%',
+                marginBottom: normalize(15),
+                marginTop: normalize(15),
+                paddingHorizontal: normalize(10),
+              }}>
+              <View style={styles.detailBox}>
+                <Image
+                  source={require('../../assets/images/pinkCalender.png')}
+                  style={styles.pinkLogo}
+                  resizeMode="cover"
+                />
+                <Text style={{color: Colors.lightGrey, fontSize: normalize(9)}}>
+                  8:00-9:00 AM, 09 Dec
+                </Text>
+              </View>
+              <View style={styles.detailBox}>
+                <Image
+                  source={require('../../assets/images/pinkLocation.png')}
+                  style={styles.pinkLogo}
+                  resizeMode="cover"
+                />
+                <Text style={{color: Colors.lightGrey, fontSize: normalize(9)}}>
+                  Prince Nigeria Street
+                </Text>
+              </View>
+            </View>
+            <View
+              style={{
+                width: '95%',
+                borderBottomColor: Colors.lightGrey2,
+                borderBottomWidth: 0.2,
+                marginLeft: normalize(10),
+                marginBottom: verticalScale(20),
+              }}></View>
+            <View
+              style={{
+                paddingHorizontal: horizontalScale(0),
+                marginBottom: normalize(100),
+              }}>
+              <Text
+                style={{
+                  fontSize: normalize(14),
+                  fontWeight: '600',
+                  marginBottom: normalize(-20),
+                  fontFamily: Fonts.Roboto_Regular,
+                  color: '#2B2D42',
+                  marginLeft: normalize(10),
+                }}>
+                Upload Work
+              </Text>
+              <Image
+                source={require('../../assets/images/uploadWork.png')}
+                style={styles.group}
+                resizeMode="stretch"
+              />
+            </View>
+          </View>
+        </ScrollView>
+        <View
+          style={{
+            height:
+              Platform.OS === 'ios' ? verticalScale(100) : verticalScale(80),
+            width: '100%',
+            paddingVertical: verticalScale(20),
+            paddingHorizontal: horizontalScale(10),
+            backgroundColor: Colors.white,
+            borderTopLeftRadius: normalize(20),
+            borderTopRightRadius: normalize(20),
+            borderWidth: 0.25,
+            borderColor: Colors.lightGrey2,
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+
+            elevation: 5,
+            position: 'absolute',
+            bottom: 0,
+          }}>
+          <FullButton
+            buttonTxt="Mark Complete and Pay"
+            onPress={() => navigation.navigate('SendMoney1')}
+          />
+        </View>
+      </SafeView>
+    </>
+  );
+};
+export default JobDetail;
+
+const styles = StyleSheet.create({
+  person: {
+    height: normalize(30),
+    width: normalize(30),
+    borderRadius: normalize(20),
+  },
+  description: {
+    color: Colors.lightGrey,
+    marginHorizontal: normalize(10),
+    fontSize: normalize(10),
+    lineHeight: verticalScale(20),
+  },
+  line: {
+    height: normalize(15),
+    width: '95%',
+    borderBottomColor: Colors.lightGrey2,
+    borderBottomWidth: 0.2,
+    marginLeft: normalize(10),
+    //marginVertical: normalize(10)
+  },
+  group: {
+    width: '100%',
+    height: normalize(215),
+    marginTop: normalize(12),
+    //backgroundColor: 'yellow'
+  },
+  SectionHeading: {
+    fontWeight: '600',
+    fontSize: normalize(14),
+    marginTop: normalize(20),
+    marginLeft: normalize(10),
+    marginBottom: normalize(8),
+    color: '#2B2D42',
+    fontFamily: Fonts.Roboto_Regular,
+  },
+  detailBox: {
+    width: normalize(140),
+    height: normalize(35),
+    borderWidth: normalize(0.5),
+    borderColor: Colors.lightGrey2,
+    borderRadius: normalize(5),
+    alignItems: 'center',
+    paddingLeft: normalize(5),
+    flexDirection: 'row',
+  },
+  pinkLogo: {
+    height: normalize(15),
+    width: normalize(15),
+    marginRight: normalize(5),
+  },
+});

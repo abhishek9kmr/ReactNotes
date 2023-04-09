@@ -1,0 +1,162 @@
+Footer
+=====
+
+import React, {useState} from 'react';
+import {View, TouchableOpacity, Image, Platform, Text} from 'react-native';
+import {Colors} from '../themes/Themes';
+import {horizontalScale, verticalScale} from '../utils/helpers/dimen1';
+import normalize from '../utils/helpers/normalize';
+import {useNavigation} from '@react-navigation/native';
+import Fonts from '../themes/Fonts';
+
+const Footer = props => {
+  const navigation = useNavigation();
+
+  const BtmTbOptions = [
+    {
+      id: 1,
+      name: 'Home',
+      img: require('../assets/icons/home.png'),
+      screen: 'Home',
+    },
+    {
+      id: 2,
+      name: 'My Jobs',
+      img: require('../assets/icons/calander.png'),
+      screen: 'ActiveJobs',
+    },
+    {
+      id: 3,
+      name: 'My Workers',
+      img: require('../assets/icons/work.png'),
+      screen: 'Favorites',
+    },
+    {
+      id: 4,
+      name: 'Find Services',
+      img: require('../assets/icons/options.png'),
+      screen: 'Home1',
+    },
+    {
+      id: 5,
+      name: 'My Profile',
+      img: require('../assets/icons/profile2.png'),
+      screen: 'MyProfile',
+    },
+  ];
+
+  const [activeIcon, setActiveIcon] = useState(1);
+  console.log(props?.activeTab);
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        height: Platform.OS === 'android' ? normalize(50) : normalize(70),
+        backgroundColor: Colors.white,
+        alignItems: 'center',
+        padding: normalize(10),
+        justifyContent: 'space-between',
+        borderTopLeftRadius: normalize(15),
+        borderTopRightRadius: normalize(15),
+        paddingBottom: Platform.OS === 'ios' ? normalize(20) : 0,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 6,
+        },
+        shadowOpacity: 0.39,
+        shadowRadius: 8.3,
+        elevation: 13,
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+      }}>
+      {/* <TouchableOpacity>
+        <Image
+          source={require('../assets/icons/home.png')}
+          style={{
+            height: normalize(25),
+            width: normalize(25),
+            resizeMode: 'contain',
+          }}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Image
+          source={require('../assets/icons/calander.png')}
+          style={{
+            height: normalize(25),
+            width: normalize(25),
+            resizeMode: 'contain',
+          }}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Image
+          source={require('../assets/icons/work.png')}
+          style={{
+            height: normalize(25),
+            width: normalize(25),
+            resizeMode: 'contain',
+          }}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Image
+          source={require('../assets/icons/options.png')}
+          style={{
+            height: normalize(25),
+            width: normalize(25),
+            resizeMode: 'contain',
+          }}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Image
+          source={require('../assets/icons/profile2.png')}
+          style={{
+            height: normalize(24),
+            width: normalize(24),
+            resizeMode: 'contain',
+          }}
+        />
+      </TouchableOpacity> */}
+      {BtmTbOptions.map((itm, idx) => (
+        <TouchableOpacity
+          onPress={() => {
+            setActiveIcon(itm.id);
+            navigation.navigate(itm.screen);
+          }}
+          key={itm.id}
+          style={{alignItems: 'center'}}>
+          <Image
+            source={itm.img}
+            style={{
+              height: itm.name === 'My Profile' ? normalize(21) : normalize(22),
+              width: itm.name === 'My Profile' ? normalize(21) : normalize(22),
+              resizeMode: 'contain',
+              tintColor:
+                props?.activeTab == itm.id
+                  ? Colors.primaryColor
+                  : Colors.lightGrey2,
+              // tintColor: (itm.id=== activeIcon)? Colors.primaryColor : Colors.lightGrey2,
+            }}
+          />
+          <Text
+            style={{
+              color:
+                props?.activeTab == itm.id ? Colors.primaryColor : Colors.black,
+              fontSize: 12,
+              fontFamily: Fonts.Roboto_Regular,
+              marginBottom: verticalScale(5),
+              marginTop: verticalScale(2),
+            }}>
+            {itm.name}
+          </Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
+};
+
+export default Footer;

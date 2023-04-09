@@ -1,0 +1,11 @@
+To do
+====
+
+1)Check footer in ios and android.
+2)ServiceList.js/Search(now carpenters)- Test in IOS.(normalize is replaced with horizontalScale).
+If it works apply it on other flatlists.
+3)JobDetail.js and jobDetail1.js
+4)Cancel Request popup has been removed from figma.
+5)Service Detail- The profile image size has been reduced. The name
+   and star rating has been center aligned with the image to make a standard design(Not as per figma). If the name is made
+parallel with '2 days ago' then image will get over the text '2 days ago' and affect the top padding.
