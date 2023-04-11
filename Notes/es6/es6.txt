@@ -279,6 +279,11 @@ const sum = arr.reduce(
 ); // 1 + 2 + 3 + 4 + 5
 console.log(sum)
 
+============================================================================================
+2. What is the result console.log(3<2<1) and why?
+
+The operator associativity of operator ‘<‘ is left to right. 3<2 is evaluated first which return false and convert to 0. Evaluate expression ‘0< 1’ returns true. So the answer is true.
+
     
 
 
