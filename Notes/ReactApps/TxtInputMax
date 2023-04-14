@@ -1,0 +1,31 @@
+//The text input with maximum width of the container
+
+import React from 'react';
+import {View, Text, StyleSheet, TextInput} from 'react-native';
+
+const Home = () => {
+  return (
+    <View style={styles.container}>
+      <Text>First Number</Text>
+      <View style={{flexDirection: 'row'}}>
+        <TextInput
+          style={{
+            height: 40,
+            backgroundColor: 'white',
+            borderWidth: 1,
+            flex: 1,
+          }}
+        />
+      </View>
+    </View>
+  );
+};
+export default Home;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'yellow',
+    padding: 10,
+  },
+});
