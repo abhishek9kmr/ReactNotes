@@ -1,0 +1,72 @@
+import React from 'react';
+import {Text} from 'react-native';
+import MaskedView from '@react-native-masked-view/masked-view';
+import LinearGradient from 'react-native-linear-gradient';
+
+const CustomGradientText = props => {
+  return (
+    <MaskedView maskElement={<Text {...props} />}>
+      <LinearGradient
+        colors={['#515BD4', '#8134AF', '#DD2A7B', '#F58529', '#FEDA77']}
+        //colors={['#5851DB', '#C13584', '#E1306C', '#FD1D1D', '#F77737']}
+        start={{x: 0.1, y: 0.1}}
+        end={{x: 1, y: 0.9}}
+        locations={[0.1072, 0.3019, 0.5242, 0.7545, 0.9088]}
+        useAngle={true}
+        angle={143.9}>
+        <Text
+          {...props}
+          numberOfLines={1}
+          style={[props.style, {opacity: 0,}]}
+        />
+      </LinearGradient>
+    </MaskedView>
+  );
+};
+
+export default CustomGradientText;
+
+===============================================================================================
+
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import MaskedView from '@react-native-masked-view/masked-view';
+import LinearGradient from 'react-native-linear-gradient';
+import CustomGradientText from './CustomGradientText';
+//import CustomGradientText from './CustomGradientText';
+
+const App = props => {
+  return (
+    <View style={{alignItems: 'center', justifyContent: 'center', backgroundColor: 'white'}}>
+      <CustomGradientText style={styles.profileInstaTxt}>
+        Hellooooooooo
+      </CustomGradientText>
+    </View>
+  );
+};
+
+export default App;
+
+const styles = StyleSheet.create({
+  profileInstaTxt: {
+    //fontFamily: Fonts.RobotoMedium,
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: 50,
+    lineHeight: 60,
+    textTransform: 'lowercase',
+    paddingLeft: 5,
+    marginTop: 100,
+    //textShadowRadius: 20,
+    //textShadowColor: 'rgba(0, 0, 0, 0.9)',
+    //elevation: 20,
+    // backgroundColor: 'black'
+    
+  },
+})
+
+=====================================================================================================
+
+https://www.npmjs.com/package/react-native-text-gradient
+
+https://shopify.github.io/react-native-skia/docs/text/text
