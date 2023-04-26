@@ -1,0 +1,70 @@
+Generator function
+=======================
+
+Generator-Function: A generator-function is defined like a normal function, but whenever it needs to generate a value, it does so with the yield keyword rather than return. The yield statement suspends the function’s execution and sends a value back to the caller, but retains enough state to enable the function to resume where it is left off. When resumed, the function continues execution immediately after the last yield run. 
+
+Ex- function* gen(){
+    yield 1;
+    yield 2;
+}
+
+const fun = gen()
+
+console.log(fun.next().value) //1
+console.log(fun.next().value) //2
+console.log(fun.next().value) // undefined
+
+Ex- function* g4() {
+    yield* [1, 2];
+  };
+
+  const g = g4()
+
+  console.log(g.next().value) //1
+  console.log(g.next().value) //2
+  console.log(g.next().value) //undefined
+
+Encountering yield and yield*
+* yield: pauses the generator execution and returns the value of the expression which is being written after the yield keyword.
+* yield*: it iterates over the operand and returns each value until done is true.
+
+====================================================================================================================
+
+Rules of Reducers
+We said earlier that reducers must always follow some special rules:
+
+They should only calculate the new state value based on the state and action arguments
+They are not allowed to modify the existing state. Instead, they must make immutable updates, 
+by copying the existing state and making changes to the copied values.
+They must not do any asynchronous logic or other "side effects"
+
+Any function that follows these rules is also known as a "pure" function, even if it's not specifically written
+as a reducer function.
+
+Reducers and Immutable Updates
+Earlier, we talked about "mutation" (modifying existing object/array values) and "immutability"
+(treating values as something that cannot be changed).
+
+In Redux, our reducers are never allowed to mutate the original / current state values!
+
+// ❌ Illegal - by default, this will mutate the state!
+state.value = 123
+
+
+// ✅ This is safe, because we made a copy
+return {
+  ...state,
+  value: 123
+}
+
+Example - 
+const obj ={
+    a: 1,
+    b: 2,
+    c: 3,
+    d: 4,
+};
+
+const obj1 = {...obj, b: 10}
+console.log(obj1); //{ a: 1, b: 10, c: 3, d: 4 }
+console.log(obj);  //{ a: 1, b: 2, c: 3, d: 4 }
