@@ -1,3 +1,5 @@
+// This is a Horizontal scroll view with pagination. Flatlist has been used to create a horizontal scroll view.
+
 import React, {useState} from 'react';
 import {View, Text, FlatList, StyleSheet, Dimensions} from 'react-native';
 
