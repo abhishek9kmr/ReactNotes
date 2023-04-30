@@ -1,0 +1,82 @@
+import React, {useState} from 'react';
+import {View, Text, FlatList, StyleSheet, Dimensions} from 'react-native';
+
+const data = [
+  {id: 1, text: 'Page 1'},
+  {id: 2, text: 'Page 2'},
+  {id: 3, text: 'Page 3'},
+  {id: 4, text: 'Page 4'},
+  {id: 5, text: 'Page 5'},
+];
+
+const PAGE_WIDTH = Dimensions.get('window').width;
+
+const Pagination = ({currentIndex}) =>
+  data.map((x, i) => (
+    <View
+      style={[styles.paginationDot, currentIndex === i && styles.activeDot]}
+    />
+  ));
+
+const HorizontalScrollable = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleScroll = event => {
+    const position = event.nativeEvent.contentOffset.x;
+    const index = Math.round(position / PAGE_WIDTH);
+    setCurrentIndex(index);
+  };
+
+  const renderItem = ({item}) => (
+    <View key={item.id} style={styles.page}>
+      <Text>{item.text}</Text>
+    </View>
+  );
+
+  return (
+    <View style={styles.container}>
+      <FlatList
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+        data={data}
+        keyExtractor={item => item.id.toString()}
+        renderItem={renderItem}
+      />
+      <View style={styles.pagination}>
+        <Pagination currentIndex={currentIndex} />
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  page: {
+    width: PAGE_WIDTH,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  pagination: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  paginationDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: 'gray',
+    margin: 5,
+  },
+  activeDot: {
+    backgroundColor: 'black',
+  },
+});
+
+export default HorizontalScrollable;
