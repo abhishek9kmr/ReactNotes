@@ -1,0 +1,291 @@
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
+import React, {useState} from 'react';
+import SafeView from '../components/SafeView';
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from '../utils/helpers/dimen';
+import Icons from '../themes/Icons';
+import {Colors} from '../themes/Themes';
+import Header from '../components/Header';
+import Search from '../components/Search';
+import HeaderFilter from '../components/HeaderFilter';
+
+const BUTTONS = [
+  {id: 1, label: 'All'},
+  {id: 2, label: 'Dentist'},
+  {id: 3, label: 'Cardiology'},
+  {id: 4, label: 'Physio Theripist'},
+];
+
+const DATA = [
+  {
+    id: '1',
+    name: 'Dr. Ether Wall',
+    designation: 'Specialist Dentist',
+    rating: '4.4',
+    views: '2821',
+    img: Icons.doctor,
+    strImg: Icons.star,
+  },
+  {
+    id: '2',
+    name: 'Dr. Ether Wall',
+    designation: 'Specialist Dentist',
+    rating: '4.4',
+    views: '2821',
+    img: Icons.doctor,
+    strImg: Icons.star,
+  },
+  {
+    id: '3',
+    name: 'Dr. Ether Wall',
+    designation: 'Specialist Dentist',
+    rating: '4.4',
+    views: '2821',
+    img: Icons.doctor,
+    strImg: Icons.star,
+  },
+  {
+    id: '4',
+    name: 'Dr. Ether Wall',
+    designation: 'Specialist Dentist',
+    rating: '4.4',
+    views: '2821',
+    img: Icons.doctor,
+    strImg: Icons.star,
+  },
+  {
+    id: '5',
+    name: 'Dr. Ether Wall',
+    designation: 'Specialist Dentist',
+    rating: '4.4',
+    views: '2821',
+    img: Icons.doctor,
+    strImg: Icons.star,
+  },
+  {
+    id: '6',
+    name: 'Dr. Ether Wall',
+    designation: 'Specialist Dentist',
+    rating: '4.4',
+    views: '2821',
+    img: Icons.doctor,
+    strImg: Icons.star,
+  },
+];
+
+const Doctors = props => {
+  const [selectedButtonId, setSelectedButtonId] = useState(1);
+
+  const handleButtonPress = id => {
+    setSelectedButtonId(id);
+  };
+
+  const Item = ({img, name, designation, rating, views, strImg}) => (
+    <TouchableOpacity onPress={() => props.navigation.navigate('Profile')}>
+      <View style={styles.card}>
+        <Image
+          source={img}
+          style={{
+            height: moderateScale(80),
+            width: moderateScale(80),
+            resizeMode: 'contain',
+          }}
+        />
+        <View
+          style={{
+            flex: 1,
+            marginLeft: moderateScale(10),
+            //paddingVertical: moderateScale(10),
+            justifyContent: 'space-between',
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              height: moderateScale(26),
+            }}>
+            <Text style={{fontSize: moderateScale(16), fontWeight: '600'}}>
+              {name}
+            </Text>
+            <Image
+              source={Icons.heart}
+              style={{
+                height: moderateScale(16),
+                width: moderateScale(16),
+                resizeMode: 'contain',
+              }}
+            />
+          </View>
+          <Text
+            style={{
+              fontSize: moderateScale(16),
+              color: Colors.secondary,
+              marginTop: moderateScale(5),
+            }}>
+            {designation}
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginTop: moderateScale(5),
+              //height: verticalScale(40),
+            }}>
+            <Image
+              source={strImg}
+              style={{
+                width: horizontalScale(80),
+                height: verticalScale(20),
+                resizeMode: 'contain',
+              }}
+            />
+            <View
+              style={{
+                flexDirection: 'row',
+                marginTop: moderateScale(5),
+                alignItems: 'center',
+              }}>
+              <Text style={{fontSize: moderateScale(15), fontWeight: '500'}}>
+                {rating}
+              </Text>
+              <Text style={{color: Colors.gray, marginLeft: moderateScale(5)}}>
+                ( ${views})
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+
+  return (
+    <>
+      <SafeView backgroundColor={Colors.chiffon}>
+        <HeaderFilter headerTxt="Doctors" headerColor={Colors.chiffon} />
+        <View style={[styles.appHMargin, {marginTop: verticalScale(15)}]}>
+          <Search />
+        </View>
+        <View style={{height: verticalScale(70)}}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={styles.buttonContainer}>
+              {BUTTONS.map(button => (
+                <TouchableOpacity
+                  key={button.id}
+                  onPress={() => handleButtonPress(button.id)}
+                  style={[
+                    styles.button,
+                    button.id === selectedButtonId && styles.selectedButton,
+                  ]}>
+                  <Text
+                    style={[
+                      styles.buttonText,
+                      button.id === selectedButtonId &&
+                        styles.selectedButtonText,
+                    ]}>
+                    {button.label}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </ScrollView>
+        </View>
+        <View style={[styles.appHMargin, {flex: 1}]}>
+          <FlatList
+            data={DATA}
+            renderItem={({item}) => (
+              <Item
+                title={item.title}
+                img={item.img}
+                name={item.name}
+                designation={item.designation}
+                rating={item.rating}
+                views={item.views}
+                strImg={item.strImg}
+              />
+            )}
+            keyExtractor={item => item.id}
+            showsVerticalScrollIndicator={false}
+          />
+        </View>
+      </SafeView>
+    </>
+  );
+};
+
+export default Doctors;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  appHMargin: {
+    paddingHorizontal: horizontalScale(15),
+  },
+  imgTxt: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  button: {
+    paddingHorizontal: moderateScale(15),
+    paddingVertical: moderateScale(8),
+    borderRadius: moderateScale(10),
+    marginHorizontal: moderateScale(8),
+    backgroundColor: '#FFF0E6',
+    borderWidth: moderateScale(1),
+    borderColor: Colors.border,
+  },
+  selectedButton: {
+    backgroundColor: Colors.primary,
+    borderColor: Colors.border,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    marginVertical: moderateScale(10),
+    marginHorizontal: moderateScale(10),
+    alignItems: 'center',
+  },
+  selectedButtonText: {
+    fontSize: moderateScale(18),
+    color: Colors.white,
+    fontWeight: 'bold',
+  },
+  buttonText: {
+    color: Colors.primary,
+    fontSize: moderateScale(18),
+  },
+  card: {
+    flexDirection: 'row',
+    backgroundColor: Colors.white,
+    marginBottom: verticalScale(15),
+    paddingVertical: verticalScale(10),
+    paddingHorizontal: 15,
+    borderColor: Colors.border,
+    borderWidth: moderateScale(1),
+    borderRadius: moderateScale(12),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+});
