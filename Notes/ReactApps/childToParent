@@ -1,0 +1,39 @@
+App.js
+========
+
+import React, {useState} from 'react';
+import {Button, Text, TouchableOpacity, View} from 'react-native';
+import Modal from 'react-native-modal';
+import Child from './Child';
+
+function App() {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>This is Parent</Text>
+      <Child childVal="5" childVal2={a => a} />
+    </View>
+  );
+}
+
+export default App;
+
+==================================================================================================
+
+Child.js
+=========
+
+
+import React, {useState} from 'react';
+import {Button, Text, TouchableOpacity, View} from 'react-native';
+import Modal from 'react-native-modal';
+
+function Child(props) {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>This is Child - {props.childVal}</Text>
+      <Text>{props.childVal2('Hello')}</Text>
+    </View>
+  );
+}
+
+export default Child;
