@@ -12,6 +12,8 @@
 // onValueChange function is invoked with the new boolean value when it changes.
 // onValueChange={(newValue) => { setChecked({...checked, [b.id]: newValue}) }}
 
+// Note- onValueChange={(newValue) => { setChecked({[b.id]: newValue}) }} - ...checked is removed for single select.
+
 // Put it all together :
 
 import React, { useEffect, useState } from 'react';
