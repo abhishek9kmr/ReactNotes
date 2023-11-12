@@ -1,0 +1,29 @@
+const headers = {
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${token}`
+}
+
+const data = {
+"user": {
+        "about": about,
+        "birthday": birthday,
+        "birth_location": birth_location,
+        "residence_location": residence_location,
+        "occupation": occupation,
+        "company_name": company_name,
+        "gender": gender,
+        "marital_status": marital_status,
+        "cellphone": phone
+      }
+}
+
+axios.post(`${SERVER}${url}`, data, {
+    headers: headers
+  })
+  .then((response) => {
+    ...
+  })
+  .catch((error) => {
+    ...
+  })
+
