@@ -1,0 +1,54 @@
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useMemo, useState } from 'react'
+
+const App = () => {
+  
+  const [myNum, setMyNum] = useState(0);
+  const [show, setShow] = useState(true);
+  
+  const getValue =() => {
+    console.log('getValue')
+   return setMyNum(myNum + 1);
+  };
+  
+  const countNumber = (num) => {
+  for(let i = 0; i <= 1000000000; i++){}
+  return num;
+  };  
+  
+  //const checkData = countNumber(myNum);
+  //This is replaced by useMemo code for better performance
+
+  const checkData = useMemo(()=> {
+    return countNumber(myNum);
+  },[myNum]);
+  
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.btn} onPress={getValue}>
+        <Text>Value</Text>
+      </TouchableOpacity>
+      <Text>{checkData}</Text>
+      <TouchableOpacity style={styles.btn} onPress={()=>setShow(!show)}>
+        <Text>{show ? 'You clicked me': 'Click me please'}</Text>
+      </TouchableOpacity>
+    </View>
+  )
+}
+
+export default App
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  btn:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'pink',
+    height: 50,
+    width: 150,
+  }
+})
