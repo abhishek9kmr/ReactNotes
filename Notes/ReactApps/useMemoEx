@@ -52,3 +52,4 @@ const styles = StyleSheet.create({
     width: 150,
   }
 })
+// For useCallback, use https://www.w3schools.com/react/react_usecallback.asp
